@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>zeroToFiftyMessage</key>
+		<string>新的一天开始，别忘了补充水分啊！</string>
+		<key>fiftyToHundredMessage</key>
+		<string>新的一天开始，再努力一下，争取喝够一大杯！</string>
+		<key>overHundredMessage</key>
+		<string>新的一天，良好的饮水开端，继续保持喔！</string>
+	</dict>
+	<dict>
+		<key>zeroToFiftyMessage</key>
+		<string>忙碌的上午，喝点水休息一下吧！</string>
+		<key>fiftyToHundredMessage</key>
+		<string>继续加油，再喝些水，然后去吃个美美的午餐吧！</string>
+		<key>overHundredMessage</key>
+		<string>太棒了，饮水习惯超级健康，准备去吃个美美的午餐吧！</string>
+	</dict>
+	<dict>
+		<key>zeroToFiftyMessage</key>
+		<string>午休过后，要记得喝一大杯水啊！</string>
+		<key>fiftyToHundredMessage</key>
+		<string>继续加油，这个时候最需要多补充水分喔！</string>
+		<key>overHundredMessage</key>
+		<string>做的太好了，继续保持喔！</string>
+	</dict>
+	<dict>
+		<key>zeroToFiftyMessage</key>
+		<string>忙碌的下午，喝点水休息一下吧！</string>
+		<key>fiftyToHundredMessage</key>
+		<string>还差一点饮水量就达标啦，继续加油！</string>
+		<key>overHundredMessage</key>
+		<string>饮水习惯真好，坚持下去喔！</string>
+	</dict>
+	<dict>
+		<key>zeroToFiftyMessage</key>
+		<string>快下班了，也别疏忽补充水分喔！</string>
+		<key>fiftyToHundredMessage</key>
+		<string>再喝些水，准备下班咯！</string>
+		<key>overHundredMessage</key>
+		<string>太棒了，饮水习惯超级健康，收拾收拾准备下班吧！</string>
+	</dict>
+</array>
+</plist>

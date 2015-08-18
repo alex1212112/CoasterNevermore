@@ -1,0 +1,36 @@
+
+/* Class = "UITextField"; placeholder = "6到11位密码"; ObjectID = "2eC-ia-Qx6"; */
+"2eC-ia-Qx6.placeholder" = "6到11位密码";
+
+/* Class = "UIButton"; normalTitle = "注册"; ObjectID = "FtI-66-gBq"; */
+"FtI-66-gBq.normalTitle" = "注册";
+
+/* Class = "UIButton"; normalTitle = "nevermore协议"; ObjectID = "GpQ-jN-KMx"; */
+"GpQ-jN-KMx.normalTitle" = "nevermore协议";
+
+/* Class = "UIButton"; normalTitle = "注册"; ObjectID = "H0v-PR-7SM"; */
+"H0v-PR-7SM.normalTitle" = "注册";
+
+/* Class = "UILabel"; text = "注册即代表已经阅读并同意                        "; ObjectID = "Ppu-Qu-9hj"; */
+"Ppu-Qu-9hj.text" = "注册即代表已经阅读并同意                        ";
+
+/* Class = "UIButton"; normalTitle = "登录"; ObjectID = "bph-pC-ZCt"; */
+"bph-pC-ZCt.normalTitle" = "登录";
+
+/* Class = "UILabel"; text = "QQ账号登录"; ObjectID = "dx4-rS-YD1"; */
+"dx4-rS-YD1.text" = "QQ账号登录";
+
+/* Class = "UITextField"; placeholder = "手机号"; ObjectID = "er4-uU-SCi"; */
+"er4-uU-SCi.placeholder" = "11位手机号";
+
+/* Class = "UILabel"; text = "QQ账号登录后，就可以在QQ健康中心查看数据了"; ObjectID = "i1u-su-eKd"; */
+"i1u-su-eKd.text" = "QQ账号登录后，就可以在QQ健康中心查看数据了";
+
+/* Class = "UILabel"; text = "或"; ObjectID = "kjf-fa-dl6"; */
+"kjf-fa-dl6.text" = "或";
+
+/* Class = "UIViewController"; title = "找回密码"; ObjectID = "pjx-Is-Sd0"; */
+"pjx-Is-Sd0.title" = "找回密码";
+
+/* Class = "UITextField"; placeholder = "6位验证码"; ObjectID = "uAp-pZ-K40"; */
+"uAp-pZ-K40.placeholder" = "6位验证码";
