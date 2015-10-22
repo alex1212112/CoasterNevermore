@@ -904,7 +904,6 @@ const NSInteger CSTBLEBindErrorUnknowCode = 100054;
 
 - (void)scan
 {
-    
     if (self.scanning)
     {
         NSLog(@"already Scanning...");

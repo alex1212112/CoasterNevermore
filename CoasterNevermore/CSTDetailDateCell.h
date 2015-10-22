@@ -12,5 +12,6 @@
 
 @property (nonatomic, strong) NSDate *date;
 @property (nonatomic, strong) UIColor *titleColor;
+@property (nonatomic, assign) BOOL shouldShowCircleView;
 
 @end

@@ -15,6 +15,7 @@
 @interface CSTDetailDateCell ()
 
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *circleImageView;
 
 @end
 
@@ -25,8 +26,17 @@
 - (void)awakeFromNib{
 
     [self p_configTitleLabel];
-
+    [self p_configCircleImageView];
+    
 }
+
+- (void)didMoveToSuperview{
+
+    [super didMoveToSuperview];
+    [self setNeedsLayout];
+    [self layoutIfNeeded];
+}
+
 
 
 #pragma mark - Private method
@@ -35,16 +45,15 @@
     
     if ([CSTIOSDevice isIPhone5]) {
         
-        self.titleLabel.font = [UIFont systemFontOfSize:9.0];
+        self.titleLabel.font = [UIFont systemFontOfSize:7.0];
     }else if ([CSTIOSDevice isIPhone6]){
     
-        self.titleLabel.font = [UIFont systemFontOfSize:11.0];
+        self.titleLabel.font = [UIFont systemFontOfSize:9.0];
     }else{
     
-        self.titleLabel.font = [UIFont systemFontOfSize:12.0];
+        self.titleLabel.font = [UIFont systemFontOfSize:11.0];
     }
 
-    
     self.titleLabel.textColor = [UIColor darkGrayColor];
     
     RAC(self.titleLabel,text) = [RACObserve(self, date) map:^id(id value) {
@@ -53,22 +62,17 @@
     }];
 }
 
+- (void)p_configCircleImageView{
+
+    self.circleImageView.layer.cornerRadius = 3.0;
+    self.circleImageView.backgroundColor = [UIColor colorFromHexString:@"15aaf2"];
+
+    self.circleImageView.hidden = YES;
+}
+
+
 #pragma mark - Setters and getters
 
-//- (void)setCanSelect:(BOOL)canSelect{
-//
-//    if (_canSelect != canSelect) {
-//        
-//        _canSelect = canSelect;
-//        
-//        if (_canSelect) {
-//            
-//            self.titleLabel.textColor = [UIColor darkGrayColor];
-//        }else{
-//            self.titleLabel.textColor = [UIColor lightGrayColor];
-//        }
-//    }
-//}
 
 
 - (void)setTitleColor:(UIColor *)titleColor{
@@ -79,4 +83,11 @@
         self.titleLabel.textColor = titleColor;
     }
 }
+
+- (void)setShouldShowCircleView:(BOOL)shouldShowCircleView{
+
+    _shouldShowCircleView = shouldShowCircleView;
+    self.circleImageView.hidden = !_shouldShowCircleView;
+}
+
 @end

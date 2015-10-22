@@ -47,7 +47,7 @@
 
 - (void)startScan{
 
-    [[CSTBLEManager shareManager] scan];
+    [[CSTBLEManager shareManager] configCentralManager];
     self.isScanning = YES;
 }
 

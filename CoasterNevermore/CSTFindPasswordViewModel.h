@@ -17,9 +17,9 @@ typedef NS_ENUM(NSInteger, CSTChangePasswordEventErrorType) {
 
 @interface CSTFindPasswordViewModel : NSObject
 
-@property (nonatomic, strong) NSString *userName;
-@property (nonatomic, strong) NSString *verifiedCode;
-@property (nonatomic, strong) NSString *currentPassword;
+@property (nonatomic, copy) NSString *userName;
+@property (nonatomic, copy) NSString *verifiedCode;
+@property (nonatomic, copy) NSString *currentPassword;
 
 
 - (RACSignal *)validateSignal;

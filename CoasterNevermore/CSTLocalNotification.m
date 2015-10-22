@@ -20,8 +20,8 @@
 
 @interface CSTLocalNotification ()
 
-@property (nonatomic, strong,readwrite) NSArray *dates;
-@property (nonatomic, strong,readwrite) NSArray *localNotificationSettingTypes;
+@property (nonatomic, copy,readwrite) NSArray *dates;
+@property (nonatomic, copy,readwrite) NSArray *localNotificationSettingTypes;
 
 @end
 
@@ -200,8 +200,6 @@ static CSTLocalNotification *instance = nil;
 
 - (void)p_resetLocalNotifications
 {
-    NSLog(@"reset");
-    
     if ([[NSDate date] cst_isWeekend])
     {
         [self removeNotifications];

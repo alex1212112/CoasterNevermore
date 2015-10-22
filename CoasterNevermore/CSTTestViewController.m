@@ -7,7 +7,7 @@
 //
 
 #import "CSTTestViewController.h"
-#import <ReactiveCocoa.h>
+#import <ReactiveCocoa/ReactiveCocoa.h>
 #import "CSTRouter.h"
 #import "CSTUserToken.h"
 

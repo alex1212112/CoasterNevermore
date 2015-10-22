@@ -7,7 +7,7 @@
 //
 
 #import "CSTUserCenterTableViewController.h"
-#import <ReactiveCocoa.h>
+#import <ReactiveCocoa/ReactiveCocoa.h>
 #import "CSTRouter.h"
 #import "CSTDataManager.h"
 #import "CSTUserCenterTableViewModel.h"
@@ -80,18 +80,19 @@
 
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (indexPath.row == 0) {
-          [CSTRouter routerToMateProfileViewControllerFromUserCenterTableViewController:self];
+        
+        if ([self.viewModel isUserOwnDevice]) {
+            [CSTRouter routerToDeviceViewControllerFromUserCenterTableViewController:self];
+        }else{
+            
+            [CSTRouter routerToBLEConnectViewControllerFromUserCenterTableViewController:self];
+        }
     }else if (indexPath.row == 2){
     
         [CSTRouter routerToAboutUsViewControllerFromUserCenterTableViewController:self];
     }else if (indexPath.row == 1){
     
-        if ([self.viewModel isUserOwnDevice]) {
-             [CSTRouter routerToDeviceViewControllerFromUserCenterTableViewController:self];
-        }else{
-            
-            [CSTRouter routerToBLEConnectViewControllerFromUserCenterTableViewController:self];
-        }
+           [CSTRouter routerToMateProfileViewControllerFromUserCenterTableViewController:self];
     }
     
 }
@@ -189,7 +190,12 @@
 
 - (void)p_configEditButton{
     
-    self.editButton.hidden = YES;
+    //self.editButton.hidden = YES;
+    
+    [[self.editButton rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
+        
+        [CSTRouter routerToUserProfileViewControllerFromUserCenterTableViewController:self];
+    }];
 }
 
 - (void)p_configUsernameLabel{

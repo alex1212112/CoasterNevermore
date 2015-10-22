@@ -8,7 +8,7 @@
 
 #import "CSTRelationship+CSTNetworkSignal.h"
 #import "CSTAPIBaseManager.h"
-#import <ReactiveCocoa.h>
+#import <ReactiveCocoa/ReactiveCocoa.h>
 #import "RACSignal+CSTModel.h"
 #import "NSData+CSTParsedJsonDataSignal.h"
 #import "CSTDataManager.h"

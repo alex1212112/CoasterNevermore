@@ -7,12 +7,12 @@
 //
 
 #import "CSTUserProfileViewModel.h"
-#import <NSArray+LinqExtensions.h>
+#import <LinqToObjectiveC/NSArray+LinqExtensions.h>
 #import "CSTBasicCellModel.h"
-#import <Mantle.h>
+#import <Mantle/Mantle.h>
 #import "CSTDataManager.h"
 #import "CSTUserProfile.h"
-#import <ReactiveCocoa.h>
+#import <ReactiveCocoa/ReactiveCocoa.h>
 #import "NSDate+CSTTransformString.h"
 #import "CSTAPIBaseManager.h"
 #import "UIImage+CSTTransformBase64String.h"

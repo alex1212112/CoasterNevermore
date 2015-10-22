@@ -8,7 +8,7 @@
 
 #import "CSTUserDataInitialViewModel.h"
 #import "CSTInitialDataCellModel.h"
-#import <ReactiveCocoa.h>
+#import <ReactiveCocoa/ReactiveCocoa.h>
 #import "CSTAPIBaseManager.h"
 #import "RACSignal+CSTModel.h"
 #import "NSData+CSTParsedJsonDataSignal.h"

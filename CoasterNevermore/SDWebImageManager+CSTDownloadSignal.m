@@ -14,20 +14,12 @@
 
 + (RACSignal *)cst_imageSignalWithURLString:(NSString *)urlString{
 
-return  [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+    return  [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
         
         [[SDWebImageManager sharedManager] downloadImageWithURL:[NSURL URLWithString:urlString] options:0 progress:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
-            
-            if (error) {
-                
-                [subscriber sendError:error];
-                return ;
-            }
-            if (image) {
                 
                 [subscriber sendNext:image];
                 [subscriber sendCompleted];
-            }
         }];
     
     return nil;

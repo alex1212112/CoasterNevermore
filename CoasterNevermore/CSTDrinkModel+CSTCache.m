@@ -9,7 +9,7 @@
 #import "CSTDrinkModel+CSTCache.h"
 #import "GHCache.h"
 #import "GHDocumentCache.h"
-#import <NSArray+LinqExtensions.h>
+#import <LinqToObjectiveC/NSArray+LinqExtensions.h>
 #import "NSArray+CSTExtention.h"
 
 @implementation CSTDrinkModel (CSTCache)

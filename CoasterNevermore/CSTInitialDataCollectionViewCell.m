@@ -8,7 +8,7 @@
 
 #import "CSTInitialDataCollectionViewCell.h"
 #import "CSTInitialDataCellModel.h"
-#import <ReactiveCocoa.h>
+#import <ReactiveCocoa/ReactiveCocoa.h>
 #import "Colours.h"
 #import "NSDate+CSTTransformString.h"
 

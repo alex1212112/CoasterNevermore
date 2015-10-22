@@ -39,6 +39,14 @@
              };
 }
 
+//+ (NSDictionary *)JSONKeyPathsByPropertyKey
+//{
+//    return @{
+//             @"date" : @[@"datetime",@"DateTime"],
+//             @"weight" : @"Weight",
+//             };
+//}
+
 + (NSValueTransformer *)uppercaseLetterKeyDateJSONTransformer{
 
     return [MTLValueTransformer transformerUsingForwardBlock:^id(id value, BOOL *success, NSError *__autoreleasing *error) {

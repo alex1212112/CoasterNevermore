@@ -656,6 +656,8 @@ NSString *const CSTHistoryUserSuggestWaterKey = @"CSTHistoryUserSuggestWaterKey"
     if (!_historyUserDrinkWater) {
         
         NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:CSTHistoryUserDrinkWaterKey];
+        
+    
         if (!data)
         {
             return nil;
@@ -772,7 +774,6 @@ NSString *const CSTHistoryUserSuggestWaterKey = @"CSTHistoryUserSuggestWaterKey"
             _todayMateSuggestWater = [[NSKeyedUnarchiver unarchiveObjectWithData:data] integerValue];
         }
     }
-    
     return _todayMateSuggestWater;
 }
 

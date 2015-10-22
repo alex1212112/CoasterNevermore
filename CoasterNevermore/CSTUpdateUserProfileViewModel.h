@@ -15,7 +15,7 @@
 
 @property (nonatomic, assign) CSTUserProfileType userProfileType;
 @property (nonatomic, strong) NSNumber *gender;
-@property (nonatomic, strong) NSString *nickname;
+@property (nonatomic, copy) NSString *nickname;
 @property (nonatomic, strong) NSDate *birthday;
 @property (nonatomic, strong) NSNumber *height;
 @property (nonatomic, strong) NSNumber *weight;

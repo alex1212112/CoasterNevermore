@@ -16,7 +16,7 @@
 
 #import "UIViewController+CSTDismissKeyboard.h"
 
-#import <ReactiveCocoa.h>
+#import <ReactiveCocoa/ReactiveCocoa.h>
 
 @interface CSTMateProfileViewController ()
 
@@ -134,7 +134,6 @@
 }
 
 - (void)p_configAvatarImageViewAfterViewdidlayout{
-
 
     self.avatarImageView.layer.cornerRadius = CGRectGetMidX(self.avatarImageView.bounds);
     self.avatarImageView.layer.masksToBounds = YES;

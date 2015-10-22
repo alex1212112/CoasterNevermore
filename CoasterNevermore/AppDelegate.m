@@ -12,7 +12,7 @@
 #import "CSTDataManager.h"
 #import "CSTWeatherManager.h"
 #import "NSData+CSTParsedJsonDataSignal.h"
-#import <ReactiveCocoa.h>
+#import <ReactiveCocoa/ReactiveCocoa.h>
 #import "CSTUmeng.h"
 #import "UMSocial.h"
 #import "CSTQQManager.h"
@@ -29,7 +29,6 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
-    
     [CSTUserDefaults registerUserDefalts];
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
@@ -42,6 +41,8 @@
     [CSTDataManager prepareLaunchData];
     [CSTUmeng configUmeng];
     [[CSTJPushManager shareManager] configJpushWithlaunchOptions:launchOptions];
+    
+    [[CSTQQManager shareManager] showQQLoginWhenFirstUse];
     
     return YES;
 }

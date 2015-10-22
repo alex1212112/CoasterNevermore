@@ -7,8 +7,8 @@
 //
 
 #import "RACSignal+CSTModel.h"
-#import <Mantle.h>
-#import <NSArray+LinqExtensions.h>
+#import <Mantle/Mantle.h>
+#import <LinqToObjectiveC/NSArray+LinqExtensions.h>
 
 @implementation RACSignal (CSTModel)
 

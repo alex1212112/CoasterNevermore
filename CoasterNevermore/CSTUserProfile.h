@@ -6,7 +6,7 @@
 //  Copyright (c) 2015年 Ren guohua. All rights reserved.
 //
 
-#import <Mantle.h>
+#import <Mantle/Mantle.h>
 @import UIKit;
 
 typedef NS_ENUM(NSInteger, CSTUserGender) {
@@ -25,18 +25,20 @@ typedef NS_ENUM(NSInteger, CSTUserProfileType) {
 
 @interface CSTUserProfile : MTLModel <MTLJSONSerializing>
 
-@property (nonatomic, strong) NSString *uid;
-@property (nonatomic, strong) NSString *nickname;
+@property (nonatomic, copy) NSString *uid;
+@property (nonatomic, copy) NSString *nickname;
+@property (nonatomic, copy) NSString *birthday;
+
+@property (nonatomic, copy) NSString *email;
+@property (nonatomic, copy) NSString *phone;
+@property (nonatomic, copy) NSString *imageURLString;
+@property (nonatomic, copy) NSString *deviceId;
+@property (nonatomic, copy) NSString *username;
+
 @property (nonatomic, strong) NSNumber *gender;
-@property (nonatomic, strong) NSString *birthday;
 @property (nonatomic, strong) NSNumber *height;
 @property (nonatomic, strong) NSNumber *weight;
-@property (nonatomic, strong) NSString *email;
-@property (nonatomic, strong) NSString *phone;
-@property (nonatomic, strong) NSString *imageURLString;
-@property (nonatomic, strong) NSString *deviceId;
 @property (nonatomic, strong) UIImage *avatarImage;
-@property (nonatomic, strong) NSString *username;
 
 - (NSData *)last4DataBytes;
 

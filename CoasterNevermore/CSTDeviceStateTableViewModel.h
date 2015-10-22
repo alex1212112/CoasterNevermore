@@ -12,11 +12,11 @@
 
 @interface CSTDeviceStateTableViewModel : NSObject
 
-@property (nonatomic, strong) NSString *deviceIDString;
-@property (nonatomic, strong) NSString *operationStateString;
-@property (nonatomic, strong) NSString *batteryStateString;
-@property (nonatomic, strong) NSString *connectStateString;
-@property (nonatomic, strong) NSString *firmwareVersionString;
+@property (nonatomic, copy) NSString *deviceIDString;
+@property (nonatomic, copy) NSString *operationStateString;
+@property (nonatomic, copy) NSString *batteryStateString;
+@property (nonatomic, copy) NSString *connectStateString;
+@property (nonatomic, copy) NSString *firmwareVersionString;
 
 @property (nonatomic, assign) BOOL isFirmwareNeedUpdate;
 

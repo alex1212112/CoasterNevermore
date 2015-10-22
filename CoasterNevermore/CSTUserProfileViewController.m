@@ -10,7 +10,7 @@
 #import "Colours.h"
 #import "CSTUserProfileViewModel.h"
 #import "CSTBasicCellModel.h"
-#import <ReactiveCocoa.h>
+#import <ReactiveCocoa/ReactiveCocoa.h>
 #import "CSTUpdateUserProfileViewController.h"
 
 @interface CSTUserProfileViewController () <UITableViewDataSource,UITableViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>

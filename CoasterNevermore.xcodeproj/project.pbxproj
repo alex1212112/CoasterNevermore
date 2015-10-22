@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		11AB18FD26CE86CC02AB01AE /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FD267670C2C081DEF6AF0051 /* libPods.a */; };
+		40A35C68C32BD2CAC756466A /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C6A8183D5437ABE740D8374 /* Pods.framework */; };
 		70001A3D1B2C651200BB70A4 /* CSTUserAccessViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 70001A3C1B2C651200BB70A4 /* CSTUserAccessViewModel.m */; };
 		700B2DC41B625DBA00F7E1CF /* CSTHealthDrink.m in Sources */ = {isa = PBXBuildFile; fileRef = 700B2DC31B625DBA00F7E1CF /* CSTHealthDrink.m */; };
 		700B2DF01B661E5E00F7E1CF /* CPTLineStyle+CSTExtention.m in Sources */ = {isa = PBXBuildFile; fileRef = 700B2DEF1B661E5E00F7E1CF /* CPTLineStyle+CSTExtention.m */; };
@@ -163,6 +163,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6C6A8183D5437ABE740D8374 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		70001A3B1B2C651200BB70A4 /* CSTUserAccessViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSTUserAccessViewModel.h; sourceTree = "<group>"; };
 		70001A3C1B2C651200BB70A4 /* CSTUserAccessViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSTUserAccessViewModel.m; sourceTree = "<group>"; };
 		700B2DC21B625DBA00F7E1CF /* CSTHealthDrink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSTHealthDrink.h; sourceTree = "<group>"; };
@@ -441,7 +442,6 @@
 		70F62E301B613B0A008AC862 /* CSTHealthRank.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSTHealthRank.m; sourceTree = "<group>"; };
 		74FC328497DB65E8EACB0BFA /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		D8B52E392BF1525D4D4FEA74 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
-		FD267670C2C081DEF6AF0051 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -463,8 +463,8 @@
 				70637F021B70A68500BDB366 /* SystemConfiguration.framework in Frameworks */,
 				70637F001B70A67C00BDB366 /* libiconv.dylib in Frameworks */,
 				70637EFE1B70A66600BDB366 /* Security.framework in Frameworks */,
-				11AB18FD26CE86CC02AB01AE /* libPods.a in Frameworks */,
 				704BF6301B79DD1400F1C27E /* libSocialQQ.a in Frameworks */,
+				40A35C68C32BD2CAC756466A /* Pods.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1160,7 +1160,7 @@
 				70637F011B70A68500BDB366 /* SystemConfiguration.framework */,
 				70637EFF1B70A67C00BDB366 /* libiconv.dylib */,
 				70637EFD1B70A66600BDB366 /* Security.framework */,
-				FD267670C2C081DEF6AF0051 /* libPods.a */,
+				6C6A8183D5437ABE740D8374 /* Pods.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1177,6 +1177,7 @@
 				703B6E231B2AD423006852C3 /* Frameworks */,
 				703B6E241B2AD423006852C3 /* Resources */,
 				53D8201D8E64B3A82C9571DF /* Copy Pods Resources */,
+				128A7A9087D22DA0C16C214C /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1211,7 +1212,7 @@
 		703B6E1E1B2AD423006852C3 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0630;
+				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "Ren guohua";
 				TargetAttributes = {
 					703B6E251B2AD423006852C3 = {
@@ -1287,6 +1288,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		128A7A9087D22DA0C16C214C /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		53D8201D8E64B3A82C9571DF /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1526,10 +1542,13 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Guohua Ren (ZSBJWV62XM)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Guohua Ren (ZSBJWV62XM)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -1548,6 +1567,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = "8d710eeb-43a7-4be2-b391-54367c5ac28d";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -1569,9 +1589,11 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Guohua Ren (ZSBJWV62XM)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Guohua Ren (ZSBJWV62XM)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_BITCODE = NO;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -1584,6 +1606,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PROVISIONING_PROFILE = "8d710eeb-43a7-4be2-b391-54367c5ac28d";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -1612,8 +1635,9 @@
 					"$(PROJECT_DIR)/CoasterNevermore/JPushLib",
 					"$(PROJECT_DIR)/CoasterNevermore/UMAnalytics_Sdk_3.5.11",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.nevermore.Coaster;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "e986f83d-202d-4956-b663-cb157344d3ec";
+				PROVISIONING_PROFILE = "8d710eeb-43a7-4be2-b391-54367c5ac28d";
 			};
 			name = Debug;
 		};
@@ -1640,8 +1664,9 @@
 					"$(PROJECT_DIR)/CoasterNevermore/JPushLib",
 					"$(PROJECT_DIR)/CoasterNevermore/UMAnalytics_Sdk_3.5.11",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.nevermore.Coaster;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "e986f83d-202d-4956-b663-cb157344d3ec";
+				PROVISIONING_PROFILE = "8d710eeb-43a7-4be2-b391-54367c5ac28d";
 			};
 			name = Release;
 		};
@@ -1649,17 +1674,18 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = CoasterNevermoreTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.nevermore.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CoasterNevermore.app/CoasterNevermore";
 			};
 			name = Debug;
@@ -1668,13 +1694,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = CoasterNevermoreTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.nevermore.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CoasterNevermore.app/CoasterNevermore";
 			};
 			name = Release;

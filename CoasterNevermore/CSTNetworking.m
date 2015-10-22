@@ -8,7 +8,7 @@
 
 #import "CSTNetworking.h"
 #import <ReactiveCocoa/ReactiveCocoa.h>
-#import <UIKit+AFNetworking.h>
+#import <AFNetworking/UIKit+AFNetworking.h>
 
 //NSString *const CSTCoasterBaseURLString = @"http://121.41.94.186:10001/";
 

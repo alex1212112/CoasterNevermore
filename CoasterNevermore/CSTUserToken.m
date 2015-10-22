@@ -7,7 +7,8 @@
 //
 
 #import "CSTUserToken.h"
-#import <ReactiveCocoa.h>
+#import <ReactiveCocoa/ReactiveCocoa.h>
+
 
 NSString *const CSTSavedUserTokenKey = @"CSTSavedUserTokenKey";
 

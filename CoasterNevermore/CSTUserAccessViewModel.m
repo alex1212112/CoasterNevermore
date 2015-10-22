@@ -9,7 +9,6 @@
 #import "CSTUserAccessViewModel.h"
 #import "CSTAPIBaseManager.h"
 #import <ReactiveCocoa/ReactiveCocoa.h>
-#import <RACEXTScope.h>
 #import "NSData+CSTParsedJsonDataSignal.h"
 #import "CSTUserToken.h"
 #import <Mantle/Mantle.h>

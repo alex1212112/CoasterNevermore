@@ -8,6 +8,7 @@
 
 @import Foundation;
 @import UIKit;
+@class RACSignal;
 
 @interface CSTBLEScanResultViewModel : NSObject
 
@@ -18,5 +19,10 @@
 - (NSString *)PeriphralIDWithIndexPath:(NSIndexPath *)indexPath;
 
 - (CGFloat)widthWithConnectStateString:(NSString *)string Font:(UIFont *)font;
+
+- (RACSignal *)bleCentralManagerOnsignal;
+
+- (RACSignal *)deviceDescriptionsSignal;
+
 
 @end

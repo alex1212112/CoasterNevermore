@@ -22,6 +22,8 @@ NSString *const CSTAQIErrorKey = @"com.nevermore.Coaster.error.aqiNull";
 
 const NSInteger CSTAQIErrorCode = 10009404;
 
+NSString *const CSTOpenWeatherAppKey = @"8ee0c6c45fd9e6e3afbdfa704ca96c16";
+
 
 static const CGFloat weightVar = 0.0326;
 static const CGFloat ph = 1.1;
@@ -353,7 +355,8 @@ static const CGFloat hh = 1.0;
     return @{
              @"lat" : lat,
              @"lon" : lon,
-             @"lang" : NSLocalizedString(@"en_us", @"en_us")
+             @"lang" : NSLocalizedString(@"en_us", @"en_us"),
+             @"APPID" : CSTOpenWeatherAppKey
              };
 }
 

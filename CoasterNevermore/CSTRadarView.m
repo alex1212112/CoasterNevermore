@@ -13,7 +13,7 @@
 @property (nonatomic, assign) NSInteger pulseCount;
 @property (nonatomic, strong) UIColor *pulseColor;
 @property (nonatomic, assign) CGFloat pulseWidth;
-@property (nonatomic, strong) NSArray *shipLayers;
+@property (nonatomic, strong) NSArray *shapeLayers;
 @property (nonatomic, assign) CGFloat animationDuration;
 @property (nonatomic, assign, getter=isAnimated) BOOL animated;
 
@@ -39,12 +39,12 @@
     if (self.animated) {
         
         [self stopAnimation];
-        [self.shipLayers enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        [self.shapeLayers enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
             [obj removeFromSuperlayer];
         }];
         
-        self.shipLayers = [self creatShiplayersWithCount:_pulseCount];
-        [self.shipLayers enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        self.shapeLayers = [self creatShapelayersWithCount:_pulseCount];
+        [self.shapeLayers enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
             
             [self insertSublayer:obj atIndex:0];
         }];
@@ -52,11 +52,11 @@
     }
     else{
         
-        [self.shipLayers enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        [self.shapeLayers enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
             [obj removeFromSuperlayer];
         }];
-        self.shipLayers = [self creatShiplayersWithCount:_pulseCount];
-        [self.shipLayers enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        self.shapeLayers = [self creatShapelayersWithCount:_pulseCount];
+        [self.shapeLayers enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
             
             [self insertSublayer:obj atIndex:0];
         }];
@@ -67,7 +67,7 @@
 
 - (void)startAnimation{
 
-    [self.shipLayers enumerateObjectsUsingBlock:^(CAShapeLayer *obj, NSUInteger idx, BOOL *stop) {
+    [self.shapeLayers enumerateObjectsUsingBlock:^(CAShapeLayer *obj, NSUInteger idx, BOOL *stop) {
        
         obj.hidden = NO;
         CAMediaTimingFunction *defaultCurve = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn];
@@ -98,7 +98,7 @@
 
 - (void)stopAnimation{
 
-    [self.shipLayers enumerateObjectsUsingBlock:^(CAShapeLayer *obj, NSUInteger idx, BOOL *stop) {
+    [self.shapeLayers enumerateObjectsUsingBlock:^(CAShapeLayer *obj, NSUInteger idx, BOOL *stop) {
     
         [obj removeAnimationForKey:@"pulsing"];
         obj.hidden = YES;
@@ -108,7 +108,7 @@
 
 #pragma mark - Private method
 
-- (NSArray *)creatShiplayersWithCount:(NSInteger)count{
+- (NSArray *)creatShapelayersWithCount:(NSInteger)count{
 
     NSMutableArray *mutableArray = [NSMutableArray array];
     CGRect rect = self.bounds;
@@ -134,14 +134,14 @@
 
 #pragma mark - Setters and getters
 
-- (NSArray *)shipLayers{
+- (NSArray *)shapeLayers{
 
-    if (!_shipLayers) {
+    if (!_shapeLayers) {
         
-        _shipLayers = [self creatShiplayersWithCount:self.pulseCount];
+        _shapeLayers = [self creatShapelayersWithCount:self.pulseCount];
     }
     
-    return _shipLayers;
+    return _shapeLayers;
 }
 
 
@@ -156,12 +156,12 @@
         if (self.animated) {
             
         [self stopAnimation];
-        [self.shipLayers enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        [self.shapeLayers enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
             [obj removeFromSuperlayer];
         }];
         
-        self.shipLayers = [self creatShiplayersWithCount:_pulseCount];
-        [self.shipLayers enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        self.shapeLayers = [self creatShapelayersWithCount:_pulseCount];
+        [self.shapeLayers enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
             
             [self addSublayer:obj];
         }];
@@ -169,12 +169,12 @@
         }
         else{
         
-            [self.shipLayers enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+            [self.shapeLayers enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
                 [obj removeFromSuperlayer];
             }];
             
-            self.shipLayers = [self creatShiplayersWithCount:_pulseCount];
-            [self.shipLayers enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+            self.shapeLayers = [self creatShapelayersWithCount:_pulseCount];
+            [self.shapeLayers enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
                 
                 [self addSublayer:obj];
             }];
@@ -200,7 +200,7 @@
         
         if (self.animated) {
             [self stopAnimation];
-            [self.shipLayers enumerateObjectsUsingBlock:^(CAShapeLayer *obj, NSUInteger idx, BOOL *stop) {
+            [self.shapeLayers enumerateObjectsUsingBlock:^(CAShapeLayer *obj, NSUInteger idx, BOOL *stop) {
                 
                 obj.strokeColor = pulseColor.CGColor;
             }];
@@ -208,7 +208,7 @@
         }
         else
         {
-            [self.shipLayers enumerateObjectsUsingBlock:^(CAShapeLayer *obj, NSUInteger idx, BOOL *stop) {
+            [self.shapeLayers enumerateObjectsUsingBlock:^(CAShapeLayer *obj, NSUInteger idx, BOOL *stop) {
                 
                 obj.strokeColor = pulseColor.CGColor;
             }];
@@ -236,13 +236,13 @@
         
         if (self.animated) {
             [self stopAnimation];
-            [self.shipLayers enumerateObjectsUsingBlock:^(CAShapeLayer *obj, NSUInteger idx, BOOL *stop) {
+            [self.shapeLayers enumerateObjectsUsingBlock:^(CAShapeLayer *obj, NSUInteger idx, BOOL *stop) {
                 
                 obj.lineWidth = pulseWidth;
             }];
             [self startAnimation];
         }else{
-            [self.shipLayers enumerateObjectsUsingBlock:^(CAShapeLayer *obj, NSUInteger idx, BOOL *stop) {
+            [self.shapeLayers enumerateObjectsUsingBlock:^(CAShapeLayer *obj, NSUInteger idx, BOOL *stop) {
                 
                 obj.lineWidth = pulseWidth;
             }];

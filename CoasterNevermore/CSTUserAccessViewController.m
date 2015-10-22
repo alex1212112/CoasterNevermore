@@ -8,8 +8,7 @@
 
 #import "CSTUserAccessViewController.h"
 #import "Colours.h"
-#import <ReactiveCocoa.h>
-#import <RACEXTScope.h>
+#import <ReactiveCocoa/ReactiveCocoa.h>
 #import "UIViewController+CSTDismissKeyboard.h"
 #import "CSTValidateHelper.h"
 #import "CSTRouter.h"
@@ -161,6 +160,32 @@
         [MBProgressHUD hideAllHUDsForView:self.view animated:NO];
         [self p_routeToNextVCWithUserProfile:x];
         [self.viewModel configBLEWithUserProfile:x];
+    }] doError:^(NSError *error) {
+        
+        [MBProgressHUD hideAllHUDsForView:self.view animated:NO];
+        
+    }] flattenMap:^RACStream *(id value) {
+        
+        return  [self.viewModel relationShipAndMateProfileSignal];
+    }];
+}
+
+
+- (RACSignal *)qqLoginSignal{
+
+
+    return [[[[[self.viewModel qqTokenSignalWithViewController:self] flattenMap:^RACStream *(id value) {
+        
+        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        
+        return [self.viewModel qqLoginSignalWithQQTokenDic:value];
+        
+    }] doNext:^(id x) {
+        
+        [MBProgressHUD hideAllHUDsForView:self.view animated:NO];
+        [self p_routeToNextVCWithUserProfile:x];
+        [self.viewModel configBLEWithUserProfile:x];
+        
     }] doError:^(NSError *error) {
         
         [MBProgressHUD hideAllHUDsForView:self.view animated:NO];

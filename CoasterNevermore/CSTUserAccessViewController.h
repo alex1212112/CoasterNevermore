@@ -16,4 +16,6 @@
 
 - (RACSignal *)qqLoginSignalWithQQTokenDic:(NSDictionary *)qqToken;
 
+- (RACSignal *)qqLoginSignal;
+
 @end

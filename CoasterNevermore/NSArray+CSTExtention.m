@@ -7,7 +7,7 @@
 //
 
 #import "NSArray+CSTExtention.h"
-#import <NSArray+LinqExtensions.h>
+#import <LinqToObjectiveC/NSArray+LinqExtensions.h>
 
 @implementation NSArray (CSTExtention)
 

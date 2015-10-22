@@ -12,7 +12,7 @@
 "H0v-PR-7SM.normalTitle" = "注册";
 
 /* Class = "UILabel"; text = "注册即代表已经阅读并同意                        "; ObjectID = "Ppu-Qu-9hj"; */
-"Ppu-Qu-9hj.text" = "注册即代表已经阅读并同意                        ";
+"Ppu-Qu-9hj.text" = "注册即代表已经阅读并同意                           ";
 
 /* Class = "UIButton"; normalTitle = "登录"; ObjectID = "bph-pC-ZCt"; */
 "bph-pC-ZCt.normalTitle" = "登录";

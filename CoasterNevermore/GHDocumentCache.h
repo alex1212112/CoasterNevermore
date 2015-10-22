@@ -25,9 +25,6 @@
 
 - (void)clearCache;//删除所有缓存里的文件,清除缓存
 
-//+ (NSString*)appVersion;//从info.plist文件中获取该应用的版本号
-
-//- (void)clearCacheDependOnVersion;//增加应用版本升级时候的缓存实效功能，缓存失效的时候会被清除
 
 - (void)cacheData:(NSData*)data tofile:(NSString*)fileName;//将数据透明的缓存到内存缓存中，如果内存缓存超出大小限制，就采取最近最不经常使用算法将其存储到磁盘上
 

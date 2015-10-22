@@ -7,11 +7,12 @@
 //
 
 #import "CSTUserCenterTableViewModel.h"
-#import <ReactiveCocoa.h>
+#import <ReactiveCocoa/ReactiveCocoa.h>
 #import "CSTDataManager.h"
 #import "CSTUserProfile.h"
 #import "CSTAPIBaseManager.h"
 #import "NSData+CSTParsedJsonDataSignal.h"
+#import "SDWebImageManager+CSTDownloadSignal.h"
 #import <SDWebImage/SDWebImageManager.h>
 
 @implementation CSTUserCenterTableViewModel
@@ -32,36 +33,27 @@
 #pragma mark -Observer
 - (void)p_configObserverWithUserProfile{
     
-    
-    @weakify(self);
     RAC(self,username) = RACObserve([CSTDataManager shareManager], userProfile.username);
     RAC(self,nickname) = RACObserve([CSTDataManager shareManager], userProfile.nickname);
-    [RACObserve([CSTDataManager shareManager], userProfile.imageURLString) subscribeNext:^(id x) {
-        @strongify(self);
+    
+    
+    RAC(self, avatarImage) =  [[RACObserve([CSTDataManager shareManager], userProfile.imageURLString) flattenMap:^RACStream *(id value) {
         
-        [[SDWebImageManager sharedManager] downloadImageWithURL:[NSURL URLWithString:x] options:0 progress:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
-            
-            if (error) {
-                
-                self.avatarImage = [UIImage imageNamed:@"AvatarIcon"];
-                return ;
-            }
-            if (image ) {
-                
-                self.avatarImage = image;
-            }
-        }];
+        return [SDWebImageManager cst_imageSignalWithURLString:value];
+    }] map:^id(id value) {
+        
+        return value ?: [UIImage imageNamed:@"AvatarIcon"];
     }];
 }
 
 - (void)p_configObserverWithNCoinCount{
 
-    @weakify(self);
-    [RACObserve([CSTDataManager shareManager], nCoinCount) subscribeNext:^(id x) {
+    
+    RAC(self,nCointCount) = [RACObserve([CSTDataManager shareManager], nCoinCount)map:^id(id value) {
         
-        @strongify(self);
-        self.nCointCount = [NSString stringWithFormat:@"奈币: %ld",(long)[x integerValue]];
+        return [NSString stringWithFormat:@"奈币: %ld",(long)[value integerValue]];
     }];
+    
 }
 
 #pragma mark - Public method

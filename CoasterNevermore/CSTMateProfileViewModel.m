@@ -17,7 +17,7 @@
 #import "CSTRelationship+CSTNetworkSignal.h"
 #import "SDWebImageManager+CSTDownloadSignal.h"
 
-#import <ReactiveCocoa.h>
+#import <ReactiveCocoa/ReactiveCocoa.h>
 
 @implementation CSTMateProfileViewModel
 
@@ -45,10 +45,12 @@
         return value ?: @"Coaster@nevermore.cn";
     }];
     
-    RAC(self, avatarImage) =  [RACObserve([CSTDataManager shareManager], mateProfile.imageURLString) flattenMap:^RACStream *(id value) {
+    RAC(self, avatarImage) =  [[RACObserve([CSTDataManager shareManager], mateProfile.imageURLString) flattenMap:^RACStream *(id value) {
         
         return [SDWebImageManager cst_imageSignalWithURLString:value];
+    }] map:^id(id value) {
         
+        return value ?: [UIImage imageNamed:@"AvatarIcon"];
     }];
 }
 

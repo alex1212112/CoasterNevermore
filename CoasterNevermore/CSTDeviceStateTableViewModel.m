@@ -7,7 +7,7 @@
 //
 
 #import "CSTDeviceStateTableViewModel.h"
-#import <ReactiveCocoa.h>
+#import <ReactiveCocoa/ReactiveCocoa.h>
 #import "CSTDataManager.h"
 #import "CSTUserProfile.h"
 #import "CSTBLEManager.h"

@@ -15,12 +15,12 @@
 
 @interface CSTUserProfileViewModel : NSObject
 
-@property (nonatomic, strong) NSArray *profileItems;
-@property (nonatomic, strong) NSString *username;
+@property (nonatomic, copy) NSArray *profileItems;
+@property (nonatomic, copy) NSString *username;
 @property (nonatomic, strong) UIImage *avatarImage;
 
 @property (nonatomic, strong) UIImage *editImage;
-@property (nonatomic, strong) NSString *editNickname;
+@property (nonatomic, copy) NSString *editNickname;
 @property (nonatomic, strong) NSNumber *editGender;
 @property (nonatomic, strong) NSNumber *editHeight;
 @property (nonatomic, strong) NSNumber *editWeight;

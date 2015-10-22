@@ -177,7 +177,27 @@ NSString *const CSTQQHealth = @"qqhealth";
     [[accessVC qqLoginSignalWithQQTokenDic:self.qqTokenParameters] subscribeNext:^(id x) {
         
     }];
+}
 
+- (void)p_switchToQQLoginWhenFirstUse{
+
+    [CSTDataManager removeAllData];
+    CSTUserAccessViewController *accessVC = (CSTUserAccessViewController *)[CSTRouter routerToLoginViewControllerWithLogin];
+    [[accessVC qqLoginSignal] subscribeNext:^(id x) {
+        
+    }];
+}
+
+- (void)p_showSwitchToQQLoginAlertWhenFirstUse{
+    
+    DXAlertView *alert = [[DXAlertView alloc] initWithTitle:@"提醒" contentText:@"使用QQ登录Coaster，即可将数据同步至QQ健康哦~" leftButtonTitle:@"取消" rightButtonTitle:@"QQ登录"];
+    
+    [alert show];
+    
+    alert.rightBlock = ^{
+        
+        [self p_switchToQQLoginWhenFirstUse];
+    };
 }
 
 
@@ -228,6 +248,22 @@ NSString *const CSTQQHealth = @"qqhealth";
     }
     
     return parameters;
+}
+
+- (void)showQQLoginWhenFirstUse{
+    
+    if (![[NSUserDefaults standardUserDefaults] boolForKey:@"firstUse"]) {
+        
+        return;
+    }
+    
+    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"firstUse"];
+    
+    if (![CSTUmeng isQQInstalled]) {
+        return;
+    }
+    
+    [self p_showSwitchToQQLoginAlertWhenFirstUse];
 }
 
 

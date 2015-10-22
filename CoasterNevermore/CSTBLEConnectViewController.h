@@ -9,7 +9,14 @@
 #import <UIKit/UIKit.h>
 @class CSTBLEConnectViewModel;
 
-@interface CSTBLEConnectViewController : UIViewController
+@protocol CSTBLEConnectDelegate <NSObject>
+
+- (void)userDidCancelScan;
+
+@end
+
+
+@interface CSTBLEConnectViewController : UIViewController <CSTBLEConnectDelegate>
 
 @property (nonatomic, strong) CSTBLEConnectViewModel *viewModel;
 

@@ -23,6 +23,8 @@
 @property (nonatomic, copy) NSArray *barchartXTicks;
 @property (nonatomic, copy) NSArray *barchartXStrings;
 
+@property (nonatomic, assign) CGFloat historyAverageDrink; //历史日均饮水量
+
 
 - (void)refreshCurrentPageData;
 

@@ -11,6 +11,7 @@
 #import "CSTBLEManager.h"
 #import <ReactiveCocoa/ReactiveCocoa.h>
 #import "CSTDeviceStateTableViewController.h"
+#import "CSTUserAccessViewController.h"
 #import "DXAlertView.h"
 #import "CSTRouter.h"
 
@@ -25,6 +26,7 @@
 @property (strong, nonatomic) UIView *bottomLineView;
 @property (strong, nonatomic) UIActivityIndicatorView *indicatorView;
 @property (strong, nonatomic) UIActivityIndicatorView *footerIndicatorView;
+@property (strong, nonatomic) UIActivityIndicatorView *headerIndicatorView;
 @property (strong, nonatomic) UILabel *connectStateLabel;
 @end
 
@@ -185,7 +187,6 @@
         cell.accessoryView = nil;
         cell.detailTextLabel.text = dic[@"detail"];
     }
-    
 }
 
 
@@ -217,17 +218,17 @@
 
 - (void)p_configFooterView{
 
-    self.cancleButton.center = CGPointMake(CGRectGetMidX(self.footerView.bounds), CGRectGetMidY(self.footerView.bounds));
+    self.cancleButton.center = CGPointMake(CGRectGetMidX(self.view.bounds), CGRectGetMidY(self.footerView.bounds));
     [self.footerView addSubview:self.cancleButton];
     
-    self.connectStateLabel.center = CGPointMake(CGRectGetMidX(self.footerView.bounds) + CGRectGetWidth(self.footerIndicatorView.bounds) / 2 + 10.0, CGRectGetMidY(self.footerView.bounds));
+    self.connectStateLabel.center = CGPointMake(CGRectGetMidX(self.view.bounds) + CGRectGetWidth(self.footerIndicatorView.bounds) / 2 + 10.0, CGRectGetMidY(self.footerView.bounds));
     [self.footerView addSubview:self.connectStateLabel];
     self.connectStateLabel.hidden = YES;
     
     
     CGFloat stringWidth = [self.viewModel widthWithConnectStateString:self.connectStateLabel.text Font:self.connectStateLabel.font];
     
-    self.footerIndicatorView.center =  CGPointMake(CGRectGetMidX(self.footerView.bounds) - stringWidth / 2 + 5.0 , CGRectGetMidY(self.footerView.bounds));
+    self.footerIndicatorView.center =  CGPointMake(CGRectGetMidX(self.view.bounds) - stringWidth / 2 + 5.0 , CGRectGetMidY(self.footerView.bounds));
     [self.footerView addSubview:self.footerIndicatorView];
     self.footerIndicatorView.hidden = YES;
     
@@ -251,17 +252,50 @@
         }
     }];
     
-    self.bottomLineView.center = CGPointMake(CGRectGetMidX(self.footerView.bounds) + 8.0, 0.0);
+    self.bottomLineView.center = CGPointMake(CGRectGetMidX(self.view.bounds) + 8.0, 0.0);
     [self.footerView addSubview:self.bottomLineView];
 }
 
 - (void)p_configHeaderView{
 
-    self.headerLabel.center = CGPointMake(CGRectGetMidX(self.headerView.bounds), CGRectGetHeight(self.headerView.bounds) - CGRectGetMidY(self.headerLabel.bounds));
+    self.headerLabel.center = CGPointMake(CGRectGetMidX(self.view.bounds), CGRectGetHeight(self.headerView.bounds) - CGRectGetMidY(self.headerLabel.bounds));
     [self.headerView addSubview:self.headerLabel];
     
-    self.topLineView.center = CGPointMake(CGRectGetMidX(self.headerView.bounds) + 8.0, CGRectGetMaxY(self.headerView.bounds) - 0.5);
+    self.topLineView.center = CGPointMake(CGRectGetMidX(self.view.bounds) + 8.0, CGRectGetMaxY(self.headerView.bounds) - 0.25);
     [self.headerView addSubview:self.topLineView];
+    
+    self.headerIndicatorView.center = CGPointMake(CGRectGetMaxX(self.view.bounds) - 15.0, CGRectGetHeight(self.headerView.bounds) - CGRectGetMidY(self.headerLabel.bounds));
+    
+    [self.headerView addSubview:self.headerIndicatorView];
+    
+    @weakify(self);
+    
+    [[RACSignal combineLatest:@[self.viewModel.bleCentralManagerOnsignal,self.viewModel.deviceDescriptionsSignal] reduce:^id(NSNumber *bleManagerOn, NSNumber *devicesNotNull){
+        
+        if ([bleManagerOn boolValue]  && [devicesNotNull boolValue]) {
+            return @1;
+        }else if([bleManagerOn boolValue]  && ![devicesNotNull boolValue]){
+            return @0;
+        }else {
+            return @-1;
+        }
+    }] subscribeNext:^(id x) {
+        
+        @strongify(self);
+        if ([x integerValue] == 0) {
+            
+            self.headerIndicatorView.hidden = NO;
+            [self.headerIndicatorView startAnimating];
+            self.headerLabel.text = @"扫描结果列表";
+        }else if([x integerValue] == 1){
+            
+            self.headerIndicatorView.hidden = YES;
+            self.headerLabel.text = @"扫描结果列表";
+        }else {
+            self.headerLabel.text = @"系统蓝牙未开启";
+            self.headerIndicatorView.hidden = YES;
+        }
+    }];
 }
 
 #pragma mark - Event response
@@ -272,12 +306,9 @@
     [[button rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
         @strongify(self);
         
-        if ([self.presentingViewController isKindOfClass:[UINavigationController class]]) {
-            
-            UINavigationController *nav = (UINavigationController *)self.presentingViewController;
-            [nav popToRootViewControllerAnimated:NO];
-            [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
-        }
+        [self.delegate userDidCancelScan];
+        
+        [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
     }];
 
 }
@@ -362,7 +393,7 @@
         _headerLabel.bounds = (CGRect){
             .origin.x = 0.0f,
             .origin.y = 0.0,
-            .size.width =   CGRectGetWidth(self.view.bounds) - 32.0,
+            .size.width = CGRectGetWidth(self.view.bounds) - 32.0,
             .size.height = 30.0,
         };
     }
@@ -379,7 +410,7 @@
         _topLineView.bounds = (CGRect){
             .origin.x = 0.0f,
             .origin.y = 0.0,
-            .size.width =   CGRectGetWidth(self.view.bounds) - 16.0,
+            .size.width = CGRectGetWidth(self.view.bounds) - 16.0,
             .size.height = 0.5,
         };
         _topLineView.backgroundColor = [UIColor groupTableViewBackgroundColor];
@@ -426,6 +457,17 @@
     }
     
     return _footerIndicatorView;
+}
+
+- (UIActivityIndicatorView *)headerIndicatorView
+{
+    if (!_headerIndicatorView)
+    {
+        _headerIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+        _headerIndicatorView.hidesWhenStopped = YES;
+    }
+    
+    return _headerIndicatorView;
 }
 
 

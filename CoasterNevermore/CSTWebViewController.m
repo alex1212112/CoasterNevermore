@@ -7,7 +7,7 @@
 //
 
 #import "CSTWebViewController.h"
-#import <NSArray+LinqExtensions.h>
+#import <LinqToObjectiveC/NSArray+LinqExtensions.h>
 #import "Colours.h"
 @import WebKit;
 

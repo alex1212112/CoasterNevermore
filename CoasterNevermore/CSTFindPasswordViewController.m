@@ -9,8 +9,7 @@
 #import "CSTFindPasswordViewController.h"
 #import "CSTFindPasswordViewModel.h"
 #import "Colours.h"
-#import <ReactiveCocoa.h>
-#import <RACEXTScope.h>
+#import <ReactiveCocoa/ReactiveCocoa.h>
 #import "UIViewController+CSTDismissKeyboard.h"
 #import "CSTValidateHelper.h"
 #import "CSTFindPasswordViewModel.h"

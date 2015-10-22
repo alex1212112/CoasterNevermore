@@ -9,7 +9,7 @@
 #import "CSTMainContentViewModel.h"
 #import "CSTIOSDevice.h"
 #import "CSTDataManager.h"
-#import <ReactiveCocoa.h>
+#import <ReactiveCocoa/ReactiveCocoa.h>
 #import "CSTUserProfile.h"
 #import "CSTAPIBaseManager.h"
 #import "NSDate+CSTTransformString.h"

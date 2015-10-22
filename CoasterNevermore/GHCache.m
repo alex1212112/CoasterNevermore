@@ -154,10 +154,12 @@ static GHCache *instance = nil;
  */
 + (NSString *)appVersion
 {
-    CFStringRef versStr = (CFStringRef)CFBundleGetValueForInfoDictionaryKey(CFBundleGetMainBundle(), kCFBundleVersionKey);
-    NSString *version = [NSString stringWithUTF8String:CFStringGetCStringPtr(versStr,kCFStringEncodingMacRoman)];
-
-    return version;
+    
+    NSDictionary *infoDic = [[NSBundle mainBundle] infoDictionary];
+    
+    NSString *appVersion = [infoDic objectForKey:(__bridge NSString *)kCFBundleVersionKey];
+    
+    return appVersion;
 }
 /**
  *  增加应用版本升级时候的缓存实效功能，缓存失效的时候会被清除

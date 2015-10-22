@@ -14,7 +14,7 @@ extern NSString *const CSTSavedQQTokenKey;
 
 @property (nonatomic, copy) NSString *accesstoken;
 @property (nonatomic, copy) NSString *openid;
-@property (nonatomic, copy) NSNumber *accesstokenexpiretime;
+@property (nonatomic, strong) NSNumber *accesstokenexpiretime;
 
 - (instancetype)initWithToken:(NSString*)token openId:(NSString *)openId expiretime:(NSNumber *)expiretime;
 

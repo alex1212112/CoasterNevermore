@@ -7,7 +7,7 @@
 //
 
 #import "NSData+CSTParsedJsonDataSignal.h"
-#import <ReactiveCocoa.h>
+#import <ReactiveCocoa/ReactiveCocoa.h>
 
 @implementation NSData (CSTParsedJsonDataSignal)
 

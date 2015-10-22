@@ -6,7 +6,7 @@
 //  Copyright (c) 2015年 Ren guohua. All rights reserved.
 //
 
-#import <ReactiveCocoa.h>
+#import <ReactiveCocoa/ReactiveCocoa.h>
 
 @interface RACSignal (CSTModel)
 

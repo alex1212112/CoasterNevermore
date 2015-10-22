@@ -12,8 +12,7 @@
 #import "Colours.h"
 #import "CSTWeatherView.h"
 #import "CSTWeatherManager.h"
-#import <ReactiveCocoa.h>
-
+#import <ReactiveCocoa/ReactiveCocoa.h>
 
 @interface CSTMainContentViewController ()
 @property (weak, nonatomic) IBOutlet CSTCircleProgressView *circleProgressView;
@@ -87,7 +86,7 @@
 - (void)viewWillAppear:(BOOL)animated{
 
     [super viewWillAppear:animated];
-    
+
 }
 
 - (void)viewDidAppear:(BOOL)animated{

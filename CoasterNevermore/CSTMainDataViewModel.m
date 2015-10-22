@@ -7,7 +7,7 @@
 //
 
 #import "CSTMainDataViewModel.h"
-#import <ReactiveCocoa.h>
+#import <ReactiveCocoa/ReactiveCocoa.h>
 #import "CSTDataManager.h"
 #import "CSTUserProfile.h"
 #import "CSTRelationship.h"
@@ -30,14 +30,12 @@
 #pragma mark -Observer
 - (void)p_configObserverWithUserProfile{
     
-    @weakify(self);
-    [[RACObserve([CSTDataManager shareManager], userProfile.imageURLString) flattenMap:^RACStream *(id value) {
+    RAC(self, avatarImage) =  [[RACObserve([CSTDataManager shareManager], userProfile.imageURLString) flattenMap:^RACStream *(id value) {
         
         return [SDWebImageManager cst_imageSignalWithURLString:value];
-    }] subscribeNext:^(id x) {
+    }] map:^id(id value) {
         
-        @strongify(self);
-        self.avatarImage = x;
+        return value ?: [UIImage imageNamed:@"AvatarIcon"];
     }];
     
 }
@@ -71,6 +69,10 @@
         
         @strongify(self);
         self.avatarImage = x;
+    }error:^(NSError *error) {
+        @strongify(self);
+        self.avatarImage = [UIImage imageNamed:@"AvatarIcon"];
+        
     }];
 }
 

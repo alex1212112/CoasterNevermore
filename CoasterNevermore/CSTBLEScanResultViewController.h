@@ -8,10 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import "VVBlurViewController.h"
+#import "CSTBLEConnectViewController.h"
 @class CSTBLEScanResultViewModel;
 
 @interface CSTBLEScanResultViewController : VVBlurViewController
 
 @property (nonatomic, strong) CSTBLEScanResultViewModel *viewModel;
+
+@property (nonatomic, weak) id <CSTBLEConnectDelegate> delegate;
 
 @end

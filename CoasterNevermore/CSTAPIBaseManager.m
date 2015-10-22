@@ -8,7 +8,6 @@
 
 #import "CSTAPIBaseManager.h"
 #import <ReactiveCocoa/ReactiveCocoa.h>
-#import <RACEXTScope.h>
 #import "CSTUserToken.h"
 
 #pragma mark - CSTAPIBaseManager

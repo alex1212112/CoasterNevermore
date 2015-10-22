@@ -14,19 +14,20 @@
 
 #import "CPTLineStyle+CSTExtention.h"
 #import "NSString+CSTExtention.h"
-#import <NSArray+LinqExtensions.h>
+#import <LinqToObjectiveC/NSArray+LinqExtensions.h>
 #import "NSDate+CSTTransformString.h"
 #import "UIView+CSTExtention.h"
 
-#import <CorePlot/ios/CorePlot-CocoaTouch.h>
+#import <CorePlot/CorePlot-CocoaTouch.h>
 #import <ReactiveCocoa/ReactiveCocoa.h>
 
 static NSString *const CSTScatterPlotIdentifier = @"com.nevermore.Coaster.CSTScatterPlotIdentifier";
+static NSString *const CSTAverageScatterPlotIdentifier = @"com.nevermore.Coaster.CSTAverageScatterPlotIdentifier";
 static NSString *const CSTPlanBarPlotIdentifier = @"com.nevermore.Coaster.CSTPlanBarPlotIdentifier";
 static NSString *const CSTDrinkBarPlotIdentifier = @"com.nevermore.Coaster.CSTDrinkBarPlotIdentifier";
 static const NSTimeInterval kSecondsInOneDay = 24 * 60 * 60;
 
-@interface CSTDetailDataViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout,CPTPlotDataSource, CPTAxisDelegate>
+@interface CSTDetailDataViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout,UIScrollViewDelegate,CPTPlotDataSource, CPTAxisDelegate>
 @property (nonatomic, weak) IBOutlet UICollectionView *collectionView;
 @property (nonatomic, weak) IBOutlet CPTGraphHostingView *plotHostingView;
 @property (weak, nonatomic) IBOutlet UIView *plotBackgroundView;
@@ -36,14 +37,15 @@ static const NSTimeInterval kSecondsInOneDay = 24 * 60 * 60;
 @property (weak, nonatomic) IBOutlet UILabel *plotDrinkLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *plotMiddleLineView;
 @property (weak, nonatomic) IBOutlet CPTGraphHostingView *barChartHostingView;
+@property (weak, nonatomic) IBOutlet UILabel *mlLabel;
 
 @property (nonatomic, strong) UISegmentedControl *titleSegment;
 @property (nonatomic, strong) CPTXYGraph *plotGraph;
 @property (nonatomic, strong) CPTScatterPlot *scatterPlot;
+@property (nonatomic, strong) CPTScatterPlot *averageScatterPlot;
+
 @property (nonatomic, strong) CPTPlotSymbol *normalSymbol;
 @property (nonatomic, strong) CPTPlotSymbol *selectedSymbol;
-
-@property (nonatomic, strong) CPTXYGraph *barchartGraph;
 
 @property (nonatomic, assign) NSInteger selectedIndex;
 @property (nonatomic, assign) NSInteger oldSelectedIndex;
@@ -51,8 +53,10 @@ static const NSTimeInterval kSecondsInOneDay = 24 * 60 * 60;
 
 @property (nonatomic, assign) NSInteger collectionViewSelectedIndex;
 
+@property (nonatomic, strong) CPTXYGraph *barchartGraph;
 @property (nonatomic, strong) CPTBarPlot *planBarPlot;
 @property (nonatomic, strong) CPTBarPlot *drinkBarPlot;
+
 @property (nonatomic, copy) NSSet *barchartXLabelSet;
 
 
@@ -124,12 +128,112 @@ static const NSTimeInterval kSecondsInOneDay = 24 * 60 * 60;
     [self p_resetPlanBarPlotBySelectedIndex];
 }
 
+#pragma mark - ScrollView delegate
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
+    
+    if (decelerate) {
+        
+        return;
+    }
+    
+    CGFloat contentOffsetX = scrollView.contentOffset.x + CGRectGetWidth(self.view.bounds) / 7 * 46.0 / 106.0 / 2;
+    NSIndexPath *index = nil;
+    
+    if (contentOffsetX < 0) {
+        
+        index = [NSIndexPath indexPathForItem:3 inSection:0];
+        
+    }else if (scrollView.contentOffset.x > scrollView.contentSize.width - CGRectGetWidth(self.view.bounds)) {
+        
+        index = [NSIndexPath indexPathForItem:[self.viewModel.historyDrinkShowDateArray count] - 3 - 1 inSection:0];
+    }else{
+        
+        CGFloat width = CGRectGetWidth(self.view.bounds) / 7;
+        
+        CGFloat contentOffsetCountsFloat = contentOffsetX / width;
+        
+        NSInteger contentOffsetCountsInt = (NSInteger)contentOffsetCountsFloat;
+        
+        if (contentOffsetCountsFloat - contentOffsetCountsInt  >= 0.5) {
+            
+            contentOffsetCountsInt ++;
+        }
+        
+        if (contentOffsetCountsInt + 3 > [self.viewModel.historyDrinkShowDateArray count] - 3) {
+            
+            return;
+        }
+        index = [NSIndexPath indexPathForItem:contentOffsetCountsInt + 3 inSection:0];
+    }
+    
+    if (!index) {
+        
+        return;
+    }
+    
+    [self p_scrollCollectionViewBySelectedIndexWithIndexPath:index];
+    [self p_resetSymbolBySelectedIndexWithScatterPlot];
+    [self p_resetXrangeBySelectedIndexWithScatterPlot];
+    [self p_loadDataWithTopDrinkLabel];
+    [self p_resetDrinkBarPlotBySelectedIndex];
+    [self p_resetPlanBarPlotBySelectedIndex];
+    
+}
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
+
+    CGFloat contentOffsetX = scrollView.contentOffset.x + CGRectGetWidth(self.view.bounds) / 7 * 46.0 / 106.0 / 2;
+    
+    NSIndexPath *index = nil;
+    
+    if (contentOffsetX < 0) {
+        
+        index = [NSIndexPath indexPathForItem:3 inSection:0];
+        
+    }else if (scrollView.contentOffset.x > scrollView.contentSize.width - CGRectGetWidth(self.view.bounds)) {
+        
+        index = [NSIndexPath indexPathForItem:[self.viewModel.historyDrinkShowDateArray count] - 3 - 1 inSection:0];
+        
+    }else{
+    
+        CGFloat width = CGRectGetWidth(self.view.bounds) / 7;
+        
+        CGFloat contentOffsetCountsFloat = contentOffsetX / width;
+        
+        NSInteger contentOffsetCountsInt = (NSInteger)contentOffsetCountsFloat;
+        
+        if (contentOffsetCountsFloat - contentOffsetCountsInt  >= 0.5) {
+            
+            contentOffsetCountsInt ++;
+        }
+        
+        if (contentOffsetCountsInt + 3 > [self.viewModel.historyDrinkShowDateArray count] - 3) {
+            
+            return;
+        }
+        index = [NSIndexPath indexPathForItem:contentOffsetCountsInt + 3 inSection:0];
+    }
+    
+    if (!index) {
+        
+        return;
+    }
+    
+    [self p_scrollCollectionViewBySelectedIndexWithIndexPath:index];
+    [self p_resetSymbolBySelectedIndexWithScatterPlot];
+    [self p_resetXrangeBySelectedIndexWithScatterPlot];
+    [self p_loadDataWithTopDrinkLabel];
+    [self p_resetDrinkBarPlotBySelectedIndex];
+    [self p_resetPlanBarPlotBySelectedIndex];
+}
+
+
 
 #pragma mark - Plot Data Source Methods
 
 -(NSUInteger)numberOfRecordsForPlot:(CPTPlot *)plot
 {
-    if ([plot.identifier isEqual:CSTScatterPlotIdentifier])
+    if ([plot.identifier isEqual:CSTScatterPlotIdentifier] || [plot.identifier isEqual:CSTAverageScatterPlotIdentifier])
     {
         return [self.viewModel.historyDrinkArray count];
     }
@@ -173,6 +277,30 @@ static const NSTimeInterval kSecondsInOneDay = 24 * 60 * 60;
         return nil;
     }
     
+    if ([(NSString *)plot.identifier isEqualToString:CSTAverageScatterPlotIdentifier]){
+        
+        if (fieldEnum == CPTScatterPlotFieldX) {
+            
+            NSDate *beginDate = [self.viewModel.historyDrinkArray[0] valueForKey:@"date"];
+            NSDate *date =  [[self.viewModel.historyDrinkArray objectAtIndex:index] valueForKey:@"date"];
+            
+            return @([date timeIntervalSinceDate:beginDate]);
+            
+        }else if (fieldEnum == CPTScatterPlotFieldY){
+            
+            CGFloat value = self.viewModel.historyAverageDrink;
+            
+            value = value / 1000.0;
+            
+            if (value > 3000) {
+                return @3000;
+            }
+            return @(value);
+        }
+        
+        return nil;
+    }
+    
     if ([plot.identifier isEqual:CSTPlanBarPlotIdentifier]) {
         
         
@@ -193,6 +321,8 @@ static const NSTimeInterval kSecondsInOneDay = 24 * 60 * 60;
             }
             return @(suggest);
         }
+        
+        return nil;
     }
     
     if ([plot.identifier isEqual:CSTDrinkBarPlotIdentifier]) {
@@ -205,7 +335,7 @@ static const NSTimeInterval kSecondsInOneDay = 24 * 60 * 60;
         }else if (fieldEnum == CPTScatterPlotFieldY){
             
             NSInteger drink = [self.viewModel.barchartDrinkArray[index] integerValue] / 1000.0 + 20.0;
-            if (drink > 800) {
+            if (drink >800) {
                 
                 return @800;
             }
@@ -218,6 +348,53 @@ static const NSTimeInterval kSecondsInOneDay = 24 * 60 * 60;
     }
     
     return nil;
+}
+
+-(CPTLayer *)dataLabelForPlot:(CPTPlot *)plot recordIndex:(NSUInteger)index{
+    
+    CPTTextLayer *newLayer = nil;
+    static CPTMutableTextStyle *whiteText = nil;
+    static dispatch_once_t whiteOnceToken = 0;
+    
+    dispatch_once(&whiteOnceToken, ^{
+        whiteText = [[CPTMutableTextStyle alloc] init];
+        whiteText.color = [CPTColor whiteColor];
+    });
+    
+    
+    NSInteger suggest = 0;
+    NSInteger drink = 0;
+    
+    if ([self.viewModel.barchartSuggestArray count] > index) {
+        
+       suggest = [self.viewModel.barchartSuggestArray[index] integerValue];
+    }
+    
+    if ([self.viewModel.barchartDrinkArray count] > index) {
+        
+        drink =  [self.viewModel.barchartDrinkArray[index] integerValue] / 1000.0;
+    }
+    
+    if ( [plot.identifier isEqual:CSTPlanBarPlotIdentifier] ) {
+   
+        if (suggest > drink) {
+            newLayer = [[CPTTextLayer alloc] initWithText:[NSString stringWithFormat:@"%lu", (unsigned long)suggest]
+                                                style:whiteText];
+        }else{
+        
+            newLayer = (id)[NSNull null];
+        }
+
+    }else if ([plot.identifier isEqual:CSTDrinkBarPlotIdentifier]){
+        
+        if (drink > suggest) {
+            newLayer = [[CPTTextLayer alloc] initWithText:[NSString stringWithFormat:@"%lu", (unsigned long)drink]
+                                                    style:whiteText];
+        }else{
+            newLayer = (id)[NSNull null];
+        }
+    }
+    return newLayer;
 }
 
 #pragma mark - Plot delegate
@@ -239,10 +416,17 @@ static const NSTimeInterval kSecondsInOneDay = 24 * 60 * 60;
 
 -(CPTPlotSymbol *)symbolForScatterPlot:(CPTScatterPlot *)plot recordIndex:(NSUInteger)index
 {
-    if ( [(NSString *)plot.identifier isEqualToString : CSTScatterPlotIdentifier] && ((NSInteger)index == self.selectedIndex)) {
-        return self.selectedSymbol;
+    if ([(NSString *)plot.identifier isEqualToString : CSTScatterPlotIdentifier]) {
+        
+        if ((NSInteger)index == self.selectedIndex) {
+            return self.selectedSymbol;
+        }else{
+            return self.normalSymbol;
+        }
     }
-    return self.normalSymbol;
+    
+    return nil;
+    
 }
 
 
@@ -272,26 +456,26 @@ static const NSTimeInterval kSecondsInOneDay = 24 * 60 * 60;
     
     @weakify(self);
     
-    
     [[RACObserve(self.viewModel, historyDrinkShowDateArray) ignore:nil] subscribeNext:^(id x) {
         
         @strongify(self);
+    
+//        if ([x count] >= 13) {
+//            
+//            self.collectionViewSelectedIndex = [x count] - 6 - 1;
+//        }else if ([x count] >= 7){
+//            self.collectionViewSelectedIndex = [x count] - 3 - 1;
+//        }
         
-        if (self.collectionViewSelectedIndex <= 2 || self.collectionViewSelectedIndex >= [x count] - 3) {
-            
-            if ([x count] >= 13) {
-                
-                self.collectionViewSelectedIndex = [x count] - 6 - 1;
-            }else if ([x count] >= 7)
-                self.collectionViewSelectedIndex = [x count] - 3 - 1;
+        if ([x count] >= 7){
+            self.collectionViewSelectedIndex = [x count] - 3 - 1;
         }
-        
+
         [self.collectionView reloadData];
         [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:self.collectionViewSelectedIndex + 3 inSection:0] atScrollPosition:UICollectionViewScrollPositionRight animated:NO];
-        
-        
     }];
 }
+
 
 - (void)p_configNavigationBar{
 
@@ -318,8 +502,8 @@ static const NSTimeInterval kSecondsInOneDay = 24 * 60 * 60;
     plotSpace.allowsUserInteraction = NO;
     
     
-    plotSpace.xRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromDouble(0.0f) length:CPTDecimalFromDouble(kSecondsInOneDay * 6 )];
-    plotSpace.yRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(-80.0f) length:CPTDecimalFromFloat(3200.0f)];
+    plotSpace.xRange = [CPTPlotRange plotRangeWithLocation:@0.0f length:@(kSecondsInOneDay * 6 )];
+    plotSpace.yRange = [CPTPlotRange plotRangeWithLocation:@(-80.0f) length:@(3300.0f)];
     
     CPTXYAxisSet *axisSet = (CPTXYAxisSet *)self.plotGraph.axisSet;
     
@@ -330,13 +514,13 @@ static const NSTimeInterval kSecondsInOneDay = 24 * 60 * 60;
     lineStyle.lineColor = [CPTColor colorWithComponentRed:178.0/255.0 green:229.0/255.0 blue:255.0/255.0 alpha:1.0];
     
     CPTXYAxis * x = axisSet.xAxis;
-    x.orthogonalCoordinateDecimal = CPTDecimalFromFloat(0.0);
+    x.orthogonalPosition = @(0.0);
     x.labelingPolicy = CPTAxisLabelingPolicyNone;
     x.axisLineStyle = lineStyle;
     
     
     CPTXYAxis * y = axisSet.yAxis;
-    y.orthogonalCoordinateDecimal = CPTDecimalFromDouble(0.0);
+    y.orthogonalPosition = @(0.0);
     y.labelingPolicy = CPTAxisLabelingPolicyNone;
     y.axisLineStyle = lineStyle;
     
@@ -355,15 +539,28 @@ static const NSTimeInterval kSecondsInOneDay = 24 * 60 * 60;
     areaGradient.angle = -90.0f;
     CPTFill * areaGradientFill  = [CPTFill fillWithGradient:areaGradient];
     self.scatterPlot.areaFill      = areaGradientFill;
-    self.scatterPlot.areaBaseValue = CPTDecimalFromDouble(0.0); // 渐变色的起点位置
+    self.scatterPlot.areaBaseValue = @(0.0); // 渐变色的起点位置
    
     self.scatterPlot.plotSymbol = self.normalSymbol;
     
     [self.plotGraph addPlot:self.scatterPlot];
     
-    self.plotHostingView.hidden = NO;
-    self.plotDrinkLabel.hidden = NO;
-    self.plotMiddleLineView.hidden = NO;
+    
+    self.averageScatterPlot.dataSource = self;
+    self.averageScatterPlot.delegate = self;
+    self.averageScatterPlot.identifier = CSTAverageScatterPlotIdentifier;
+    
+    lineStyle.lineWidth   = 1.0;
+    lineStyle.lineColor   = [CPTColor colorWithComponentRed:22.0f/255.0f green:169.0f/255.0f blue:242.0f/255.0f alpha:1.0f];;
+    lineStyle.dashPattern = @[@5, @5];
+    self.averageScatterPlot.dataLineStyle = lineStyle;
+    
+    [self.plotGraph addPlot:self.averageScatterPlot];
+    
+    self.plotHostingView.hidden = YES;
+    self.plotDrinkLabel.hidden = YES;
+    self.plotMiddleLineView.hidden = YES;
+    
     
     @weakify(self);
     [[RACObserve(self.viewModel, historyDrinkArray) ignore:nil] subscribeNext:^(id x) {
@@ -375,6 +572,7 @@ static const NSTimeInterval kSecondsInOneDay = 24 * 60 * 60;
         }
         [self p_reloadScatterPlot];
         [self p_loadDataWithTopDrinkLabel];
+        [self p_loadAverageLabel];
     }];
 }
 
@@ -396,11 +594,10 @@ static const NSTimeInterval kSecondsInOneDay = 24 * 60 * 60;
     
     CPTXYPlotSpace *plotSpace = (CPTXYPlotSpace *)self.plotGraph.defaultPlotSpace;
     
-    plotSpace.xRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromDouble(([self.viewModel.historyDrinkArray count] - 7) * kSecondsInOneDay) length:CPTDecimalFromDouble(kSecondsInOneDay * 6)];
+    plotSpace.xRange = [CPTPlotRange plotRangeWithLocation:@(([self.viewModel.historyDrinkArray count] - 3 - 1) * kSecondsInOneDay) length:@(kSecondsInOneDay * 6)];
     
     [self.plotGraph reloadData];
 }
-
 
 
 - (void)p_configCell:(CSTDetailDateCell *)cell indexPath:(NSIndexPath *)indexPath{
@@ -410,14 +607,17 @@ static const NSTimeInterval kSecondsInOneDay = 24 * 60 * 60;
     if (indexPath.row == self.collectionViewSelectedIndex) {
         
         cell.titleColor =  [UIColor colorFromHexString:@"15aaf2"];
+        cell.shouldShowCircleView = YES;
         
     }else if (indexPath.row < 3 || indexPath.row >= [self.viewModel.historyDrinkShowDateArray count] - 3){
         
         cell.titleColor =  [UIColor lightGrayColor];
+        cell.shouldShowCircleView = NO;
         
     }else{
         
         cell.titleColor =  [UIColor darkGrayColor];
+        cell.shouldShowCircleView = NO;
     }
 }
 
@@ -433,7 +633,16 @@ static const NSTimeInterval kSecondsInOneDay = 24 * 60 * 60;
     }
     
     self.collectionViewSelectedIndex = indexPath.item;
+    
     [self.collectionView reloadData];
+}
+
+- (void)p_loadAverageLabel{
+
+    if (self.titleSegment.selectedSegmentIndex == 1) {
+        
+        self.mlLabel.text = [NSString stringWithFormat:@"日均 : %ldml",(long)(self.viewModel.historyAverageDrink / 1000.0)];
+    }
 }
 
 - (void)p_loadDataWithTopDrinkLabel{
@@ -467,7 +676,7 @@ static const NSTimeInterval kSecondsInOneDay = 24 * 60 * 60;
     CPTXYPlotSpace *plotSpace = (CPTXYPlotSpace *)self.plotGraph.defaultPlotSpace;
     
     CPTPlotRange *oldRange = plotSpace.xRange;
-    CPTPlotRange *currentRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromDouble((self.selectedIndex - 3) * kSecondsInOneDay) length:CPTDecimalFromDouble(kSecondsInOneDay * 6)];
+    CPTPlotRange *currentRange = [CPTPlotRange plotRangeWithLocation:@((self.selectedIndex - 3) * kSecondsInOneDay) length:@(kSecondsInOneDay * 6)];
     
     [CPTAnimation animate:plotSpace
                  property:@"xRange"
@@ -502,8 +711,8 @@ static const NSTimeInterval kSecondsInOneDay = 24 * 60 * 60;
     CPTXYPlotSpace *plotSpace = (CPTXYPlotSpace *)self.barchartGraph. defaultPlotSpace ;
     //plotSpace.allowsUserInteraction = YES;
   
-    plotSpace.yRange = [ CPTPlotRange plotRangeWithLocation : CPTDecimalFromFloat ( 0.0f ) length : CPTDecimalFromFloat ( 800.0f )];
-    plotSpace.xRange = [ CPTPlotRange plotRangeWithLocation : CPTDecimalFromFloat ( 0.0f ) length : CPTDecimalFromFloat (18.0f )];
+    plotSpace.yRange = [ CPTPlotRange plotRangeWithLocation :  @( 0.0f ) length : @( 900.0f )];
+    plotSpace.xRange = [ CPTPlotRange plotRangeWithLocation :  @( 0.0f ) length :  @(18.0f )];
     
     // 坐标系
     CPTXYAxisSet *axisSet = ( CPTXYAxisSet *)self.barchartGraph.axisSet ;
@@ -517,11 +726,11 @@ static const NSTimeInterval kSecondsInOneDay = 24 * 60 * 60;
     x.axisLineStyle = lineStyle;
     x.labelingPolicy = CPTAxisLabelingPolicyNone;
     x.axisLabels = self.barchartXLabelSet;
-    x.orthogonalCoordinateDecimal = CPTDecimalFromDouble(0.0);
+    x.orthogonalPosition = @(0.0);
     
     //y 轴
     CPTXYAxis *y = axisSet. yAxis ;
-    y.orthogonalCoordinateDecimal = CPTDecimalFromDouble(0.0);
+    y.orthogonalPosition = @(0.0);
     y.labelingPolicy = CPTAxisLabelingPolicyNone;
     y.hidden = YES;
 
@@ -532,9 +741,15 @@ static const NSTimeInterval kSecondsInOneDay = 24 * 60 * 60;
     
     self.planBarPlot.fill  = [CPTFill fillWithColor:[CPTColor colorWithComponentRed:178.0 / 255.0 green:229.0 / 255.0 blue:255.0 / 255.0 alpha:1.0]];
     self.planBarPlot.lineStyle = barLineStyle;
+    
+    
+    CPTMutableTextStyle *whiteTextStyle = [CPTMutableTextStyle textStyle];
+    whiteTextStyle.color = [CPTColor whiteColor];
+    self.planBarPlot.labelTextStyle = whiteTextStyle;
+    self.planBarPlot.labelOffset = 0.0;
    
-    self.planBarPlot.baseValue = CPTDecimalFromDouble(20.0);
-    self.planBarPlot.barWidth = CPTDecimalFromFloat(1.0f);
+    self.planBarPlot.baseValue = @(20.0);
+    self.planBarPlot.barWidth = @(1.0f);
     //self.planBarPlot.barOffset = CPTDecimalFromFloat ( 2.0f ) ;
     // 数据源，必须实现 CPPlotDataSource 协议
     self.planBarPlot.dataSource = self ;
@@ -545,27 +760,34 @@ static const NSTimeInterval kSecondsInOneDay = 24 * 60 * 60;
     // 添加图形到绘图空间
     [self.barchartGraph addPlot:self.planBarPlot];
     
-    
-    
     self.drinkBarPlot.fill  = [CPTFill fillWithColor:[CPTColor whiteColor]];
     self.drinkBarPlot.lineStyle = barLineStyle;
+    
+    self.drinkBarPlot.labelTextStyle = whiteTextStyle;
+    self.drinkBarPlot.labelOffset = 0.0;
     
     // 数据源，必须实现 CPPlotDataSource 协议
     self.drinkBarPlot. dataSource = self ;
     // 柱子的起始基线：即最下沿的 y 坐标
-    self.drinkBarPlot. baseValue = CPTDecimalFromDouble(20.0);
-    self.drinkBarPlot.barWidth   = CPTDecimalFromFloat(1.0f);
+    self.drinkBarPlot. baseValue = @(20.0);
+    self.drinkBarPlot.barWidth   = @(1.0f);
     self.drinkBarPlot.barCornerRadius = 10.0;
     self.drinkBarPlot.barBaseCornerRadius = 10.0f;
 
     self.drinkBarPlot. identifier = CSTDrinkBarPlotIdentifier;
     [self.barchartGraph addPlot:self.drinkBarPlot];
     
-    self.barChartHostingView.hidden = YES;
+    self.barChartHostingView.hidden = NO;
+    self.mlLabel.hidden = NO;
     
     @weakify(self);
     [[RACObserve(self.viewModel, historyDrinkDetail) ignore:nil] subscribeNext:^(id x) {
         @strongify(self);
+        
+        if ([x count] == 0) {
+            return ;
+        }
+        
         if (!self.selectedDate) {
             self.selectedDate = [self.viewModel defaultSelectedDateWithDetailArry:x];
         }
@@ -575,7 +797,6 @@ static const NSTimeInterval kSecondsInOneDay = 24 * 60 * 60;
         self.viewModel.barchartSuggestArray = [self.viewModel segmentArraywithSuggests:self.viewModel.historySuggestDrink inDate:self.selectedDate];
         
         [self.planBarPlot reloadData];
-        
     }];
     
     [RACObserve(self.viewModel, historySuggestDrink) subscribeNext:^(id x) {
@@ -598,17 +819,19 @@ static const NSTimeInterval kSecondsInOneDay = 24 * 60 * 60;
     [[segment rac_newSelectedSegmentIndexChannelWithNilValue:nil]subscribeNext:^(id x) {
         @strongify(self);
         
-        if ([x integerValue] == 0) {
+        if ([x integerValue] == 1) {
             
             self.plotHostingView.hidden = NO;
             self.plotDrinkLabel.hidden = NO;
             self.plotMiddleLineView.hidden = NO;
             self.barChartHostingView.hidden = YES;
-        }else if ([x integerValue] == 1){
+            self.mlLabel.text = [NSString stringWithFormat:@"日均 : %ldml",(long)(self.viewModel.historyAverageDrink / 1000.0)];
+        }else if ([x integerValue] == 0){
             self.plotHostingView.hidden = YES;
             self.plotDrinkLabel.hidden = YES;
             self.plotMiddleLineView.hidden = YES;
             self.barChartHostingView.hidden = NO;
+            self.mlLabel.text = @"单位 : ml";
             
         }
     }];
@@ -635,7 +858,7 @@ static const NSTimeInterval kSecondsInOneDay = 24 * 60 * 60;
     
     if (!_titleSegment) {
         
-        _titleSegment = [[UISegmentedControl alloc] initWithItems:@[@"时间段",@"每日饮水"]];
+        _titleSegment = [[UISegmentedControl alloc] initWithItems:@[@"饮水分布",@"历史曲线"]];
         
         _titleSegment.selectedSegmentIndex = 0;
         _titleSegment.tintColor = [UIColor whiteColor];
@@ -667,6 +890,15 @@ static const NSTimeInterval kSecondsInOneDay = 24 * 60 * 60;
     }
     
     return _scatterPlot;
+}
+
+- (CPTScatterPlot *)averageScatterPlot{
+
+    if (!_averageScatterPlot) {
+        
+        _averageScatterPlot = [[CPTScatterPlot alloc] init];
+    }
+    return _averageScatterPlot;
 }
 
 - (CPTPlotSymbol *)normalSymbol{
@@ -739,7 +971,7 @@ static const NSTimeInterval kSecondsInOneDay = 24 * 60 * 60;
             
             @strongify(self);
             CPTAxisLabel *newLabel = [[CPTAxisLabel alloc] initWithText:self.viewModel.barchartXStrings[idx] textStyle:textStye];
-            newLabel.tickLocation = ((NSNumber *)obj).decimalValue;
+            newLabel.tickLocation = ((NSNumber *)obj);
             newLabel.offset = 0.0;
             [mutableSet addObject:newLabel];
         }];

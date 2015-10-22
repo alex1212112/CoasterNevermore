@@ -24,6 +24,8 @@ extern NSString *const CSTQQHealth;
 
 + (NSDictionary *)upLoadDrinkToQQParametersWithDrinkArray:(NSArray *)array date:(NSDate *)date;
 
+- (void)showQQLoginWhenFirstUse;
+
 
 
 

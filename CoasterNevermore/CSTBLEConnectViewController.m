@@ -12,6 +12,7 @@
 #import "CSTRouter.h"
 #import "CSTBLEConnectViewModel.h"
 #import "CSTBLEScanResultViewController.h"
+#import "CSTUserAccessViewController.h"
 
 @interface CSTBLEConnectViewController ()
 @property (weak, nonatomic) IBOutlet CSTRadarView *radarView;
@@ -87,6 +88,35 @@
     return NO;
 }
 
+#pragma mark - CSTBLEConnectDelegate
+
+- (void)userDidCancelScan{
+
+    if (self.reScanButton.hidden) {
+        
+        self.reScanButton.hidden = NO;
+        self.reScanButton.alpha = 0;
+        self.detailLabel.text = @"是否重新搜索 ?";
+        [self.radarView stopAnimation];
+        [self.viewModel stopScan];
+        [self p_stopTimer];
+        
+        [NSLayoutConstraint  deactivateConstraints:self.reScanButtonConstraintsFirst];
+        [NSLayoutConstraint  deactivateConstraints:self.notNowButtonConstraintsFirst];
+        [NSLayoutConstraint  activateConstraints:self.reScanButtonConstraintsSecond];
+        [NSLayoutConstraint  activateConstraints:self.notNowButtonConstraintsSecond];
+        
+        [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
+            
+            [self.view layoutIfNeeded];
+            self.reScanButton.alpha = 1;
+            
+        } completion:^(BOOL finished) {
+            
+            //self.questionButton.hidden = NO;
+        }];
+    }
+}
 
 #pragma mark - Private method
 
@@ -218,9 +248,9 @@
         
         [self p_stopScan];
         
-        if (self.storyboard == [UIStoryboard storyboardWithName:@"CSTLogin" bundle:nil]) {
-         
-            [CSTRouter routerToViewControllerType:CSTRouterViewControllerTypeMain fromViewController:self];
+        if ([self.navigationController.viewControllers[0] isKindOfClass:[CSTUserAccessViewController class]]) {
+            
+             [CSTRouter routerToViewControllerType:CSTRouterViewControllerTypeMain fromViewController:self];
         }else{
         
             [self.navigationController popToRootViewControllerAnimated:NO];
@@ -253,11 +283,11 @@
                 
                 return ;
             }
-
             [self p_stopTimer];
             UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"CSTLogin" bundle:nil];
             CSTBLEScanResultViewController *scanResultVC = [storyboard instantiateViewControllerWithIdentifier:@"CSTBLEScanResultViewController"];
             scanResultVC.transitionType = VVBlurTransitionTypeTypeBottomToTop;
+            scanResultVC.delegate = self;
             
             [self presentViewController:scanResultVC animated:YES completion:nil];
         }];

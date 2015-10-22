@@ -405,9 +405,10 @@ static CSTRouter *instance = nil;
         accessVC = (CSTUserAccessViewController *)currentRootViewController;
     }else{
         
-        accessVC = [[UIStoryboard storyboardWithName:@"CSTLogin" bundle:nil] instantiateInitialViewController];
+        UINavigationController *presentedNav = [[UIStoryboard storyboardWithName:@"CSTLogin" bundle:nil] instantiateInitialViewController];
         UIViewController *topVC = [CSTRouter appTopViewController];
-        [topVC presentViewController:accessVC animated:NO completion:nil];
+        [topVC presentViewController:presentedNav animated:NO completion:nil];
+        accessVC = presentedNav.viewControllers[0];
     }
 
     return accessVC;

@@ -20,8 +20,8 @@ typedef NS_ENUM(NSInteger, CSTLocalNotificationSetting){
 @interface CSTLocalNotification : NSObject
 
 @property (nonatomic, assign) CSTLocalNotificationSetting localNotificationSetting;
-@property (nonatomic, strong,readonly) NSArray *localNotificationSettingTypes;
-@property (nonatomic, strong,readonly) NSArray *dates;
+@property (nonatomic, copy,readonly) NSArray *localNotificationSettingTypes;
+@property (nonatomic, copy,readonly) NSArray *dates;
 
 
 + (instancetype)shareNotification;

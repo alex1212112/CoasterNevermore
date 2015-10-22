@@ -6,7 +6,7 @@
 //  Copyright (c) 2015年 Ren guohua. All rights reserved.
 //
 
-#import <CorePlot/ios/CorePlot-CocoaTouch.h>
+#import <CorePlot/CorePlot-CocoaTouch.h>
 
 @interface CPTLineStyle (CSTExtention)
 

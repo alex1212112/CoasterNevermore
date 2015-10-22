@@ -34,11 +34,12 @@ typedef NS_ENUM(NSInteger, CSTAccessEventErrorType) {
 
 @interface CSTUserAccessViewModel : NSObject
 
-@property (nonatomic, assign) CSTAccessType accessType;
-@property (nonatomic, strong) NSString *userName;
-@property (nonatomic, strong) NSString *password;
-@property (nonatomic, strong) NSString *verifiedCode;
+@property (nonatomic, copy) NSString *userName;
+@property (nonatomic, copy) NSString *password;
+@property (nonatomic, copy) NSString *verifiedCode;
+
 @property (nonatomic, weak) id <CSTThirdPartyLoginDelegate> delegate;
+@property (nonatomic, assign) CSTAccessType accessType;
 
 @property (nonatomic, copy) NSDictionary *qqTokenParameters;
 

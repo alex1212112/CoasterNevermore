@@ -10,7 +10,7 @@
 #import "CSTMainContentViewController.h"
 #import "CSTMainContentViewModel.h"
 #import "CSTWillBindMateViewController.h"
-#import <ReactiveCocoa.h>
+#import <ReactiveCocoa/ReactiveCocoa.h>
 #import "CSTUserToken.h"
 #import "Colours.h"
 #import "CSTRouter.h"
@@ -56,12 +56,12 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    [self.viewModel refreshUserAvatar];
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    [self.viewModel refreshUserAvatar];
 }
 
 - (void)viewDidLayoutSubviews{
@@ -168,12 +168,15 @@
     if (scrollView.contentOffset.x  >= CGRectGetWidth(self.view.bounds)) {
         
         self.navigationItem.rightBarButtonItem = nil;
+        self.navigationItem.leftBarButtonItem = nil;
         self. titleSegment.selectedSegmentIndex = 1;
         
     }else if(scrollView.contentOffset.x == 0){
         
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.rightButton];
+        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.leftButton];
         self. titleSegment.selectedSegmentIndex = 0;
+        
     }
 }
 

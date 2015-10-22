@@ -8,7 +8,7 @@
 
 #import "CSTUserProfile.h"
 #import "CSTNetworking.h"
-#import <ReactiveCocoa.h>
+#import <ReactiveCocoa/ReactiveCocoa.h>
 #import <SDWebImage/SDWebImageManager.h>
 
 @implementation CSTUserProfile
@@ -18,7 +18,6 @@
 
     if (self = [super init]) {
         
-       // [self p_configObserverWithImageURLString];
     }
     return self;
 }
@@ -27,7 +26,7 @@
 
     if (self = [super initWithCoder:coder]) {
         
-       // [self p_configObserverWithImageURLString];
+    
     }
     return self;
 }
@@ -50,32 +49,6 @@
 
 #pragma mark - Private method
 
-- (void)p_configObserverWithImageURLString{
-
-    @weakify(self);
-    [[RACObserve(self, imageURLString) ignore:nil] subscribeNext:^(id x) {
-        @strongify(self);
-
-        self.avatarImage = [[[SDWebImageManager sharedManager] imageCache] imageFromMemoryCacheForKey:x] ?: [[[SDWebImageManager sharedManager] imageCache] imageFromDiskCacheForKey:x];
-        
-        if ([AFNetworkReachabilityManager sharedManager].reachable) {
-            
-            [[[SDWebImageManager sharedManager] imageCache] clearDisk];
-            [[[SDWebImageManager sharedManager] imageCache] clearMemory];
-            
-            [[SDWebImageManager sharedManager] downloadImageWithURL:[NSURL URLWithString:x] options:0 progress:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
-                
-                if (error) {
-                    return ;
-                }
-                if (image && !self.avatarImage) {
-                    
-                    self.avatarImage = image;
-                }
-            }];
-        }
-    }];
-}
 
 #pragma mark - Public method
 - (NSData *)last4DataBytes

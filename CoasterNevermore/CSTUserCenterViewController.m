@@ -7,7 +7,7 @@
 //
 
 #import "CSTUserCenterViewController.h"
-#import <ReactiveCocoa.h>
+#import <ReactiveCocoa/ReactiveCocoa.h>
 #import "CSTRouter.h"
 
 @interface CSTUserCenterViewController () <UIGestureRecognizerDelegate>

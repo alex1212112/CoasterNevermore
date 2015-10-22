@@ -11,7 +11,7 @@
 #import "CSTAPIBaseManager.h"
 #import "NSDate+CSTTransformString.h"
 #import "NSData+CSTParsedJsonDataSignal.h"
-#import <NSArray+LinqExtensions.h>
+#import <LinqToObjectiveC/NSArray+LinqExtensions.h>
 #import <Mantle/Mantle.h>
 #import "CSTDrinkModel.h"
 #import "CSTDataManager.h"
@@ -50,6 +50,8 @@ NSInteger const kShowDatesCount = 13;
         @strongify(self);
         
         self.historyDrinkArray = [self p_arrayWithHistoryDrinkArray:x];
+        
+        self.historyAverageDrink = [self p_averageDrinkWithHistoryDrinkArray:self.historyDrinkArray];
         self.historyDrinkShowDateArray = [self p_showDateArrayWithHistoryDrinkArray:self.historyDrinkArray];
     }];
 }
@@ -123,13 +125,20 @@ NSInteger const kShowDatesCount = 13;
     if ([array count] == 0) {
         
         return 0;
-    }
-    if ([array count] <= 7) {
-        
-        return  [array count] / 2 + 1;
+    }else{
+        return [array count] - 1;
     }
     
-    return [array count] - 4;
+//    if ([array count] == 0) {
+//        
+//        return 0;
+//    }
+//    if ([array count] <= 7) {
+//        
+//        return  [array count] / 2 + 1;
+//    }
+//    
+//    return [array count] - 4;
 }
 
 - (NSDate *)defaultSelectedDateWithDetailArry:(NSArray *)array{
@@ -146,12 +155,14 @@ NSInteger const kShowDatesCount = 13;
         
         return firstDate;
     }
-    if (intervalDays <= 7) {
-        
-        return  [firstDate cst_dateWithIntervalDays: intervalDays / 2 + 1];
-    }
     
-    return  [firstDate cst_dateWithIntervalDays: intervalDays - 4];
+    return  [firstDate cst_dateWithIntervalDays: intervalDays - 1];
+//    if (intervalDays <= 7) {
+//        
+//        return  [firstDate cst_dateWithIntervalDays: intervalDays / 2 + 1];
+//    }
+//    
+//    return  [firstDate cst_dateWithIntervalDays: intervalDays - 4];
 }
 
 
@@ -191,6 +202,7 @@ NSInteger const kShowDatesCount = 13;
         
         weight = @2000;
     }
+    
     return  [[CSTDayPeriod cst_modulus] linq_select:^id(id item) {
        
         return @([weight doubleValue] * [item doubleValue]);
@@ -199,6 +211,11 @@ NSInteger const kShowDatesCount = 13;
 
 #pragma mark - Private method
 
+
+- (CGFloat)p_averageDrinkWithHistoryDrinkArray:(NSArray *)drinkArray{
+
+    return [[drinkArray valueForKeyPath:@"@sum.weight"] doubleValue] / [drinkArray count];
+}
 
 - (NSArray *)p_arrayWithHistoryDrinkArray:(NSArray *)historyDrinkArray{
 
@@ -246,11 +263,9 @@ NSInteger const kShowDatesCount = 13;
 
 - (NSArray *)p_showDateArrayWithHistoryDrinkArray:(NSArray *)drinkArray{
 
-    if ([drinkArray  count] == 0) {
-        
-        return nil;
-    }
-    NSArray *dateArray = [drinkArray valueForKeyPath:@"date"];
+
+    NSArray *dateArray = [drinkArray count] == 0 ? @[[NSDate date]] :  [drinkArray valueForKeyPath:@"date"];
+    
     NSMutableArray *mutableArray = [NSMutableArray array];
     NSDate *firstDate = [dateArray firstObject];
     NSDate *beginDate = nil;
@@ -292,6 +307,7 @@ NSInteger const kShowDatesCount = 13;
     }] doNext:^(id x) {
         
         [CSTDataManager shareManager].historyUserDrinkWater = x;
+
     }];
 
 }

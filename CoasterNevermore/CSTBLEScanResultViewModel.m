@@ -9,7 +9,7 @@
 #import "CSTBLEScanResultViewModel.h"
 #import "CSTBLEManager.h"
 #import <ReactiveCocoa/ReactiveCocoa.h>
-#import <NSArray+LinqExtensions.h>
+#import <LinqToObjectiveC/NSArray+LinqExtensions.h>
 #import "CBPeripheral+CSTBLE.h"
 
 @implementation CSTBLEScanResultViewModel
@@ -80,5 +80,22 @@
     
     return CGRectGetWidth(rect);
 }
+
+- (RACSignal *)bleCentralManagerOnsignal{
+
+    return [RACObserve([CSTBLEManager shareManager], centralManager.state) map:^id(id value) {
+        
+        return @([value integerValue] == CBPeripheralManagerStatePoweredOn);
+    }];
+}
+
+- (RACSignal *)deviceDescriptionsSignal{
+
+    return [RACObserve(self, deviceDescriptions) map:^id(id value) {
+        
+        return @([value count] != 0);
+    }];
+}
+
 
 @end
