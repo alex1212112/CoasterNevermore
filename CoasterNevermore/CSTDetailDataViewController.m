@@ -27,7 +27,7 @@ static NSString *const CSTPlanBarPlotIdentifier = @"com.nevermore.Coaster.CSTPla
 static NSString *const CSTDrinkBarPlotIdentifier = @"com.nevermore.Coaster.CSTDrinkBarPlotIdentifier";
 static const NSTimeInterval kSecondsInOneDay = 24 * 60 * 60;
 
-@interface CSTDetailDataViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout,UIScrollViewDelegate,CPTPlotDataSource, CPTAxisDelegate>
+@interface CSTDetailDataViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout,UIScrollViewDelegate,CPTPlotDataSource, CPTAxisDelegate,CPTPlotSpaceDelegate>
 @property (nonatomic, weak) IBOutlet UICollectionView *collectionView;
 @property (nonatomic, weak) IBOutlet CPTGraphHostingView *plotHostingView;
 @property (weak, nonatomic) IBOutlet UIView *plotBackgroundView;
@@ -58,6 +58,8 @@ static const NSTimeInterval kSecondsInOneDay = 24 * 60 * 60;
 @property (nonatomic, strong) CPTBarPlot *drinkBarPlot;
 
 @property (nonatomic, copy) NSSet *barchartXLabelSet;
+
+@property (nonatomic, strong) NSTimer *timer;
 
 
 
@@ -351,6 +353,17 @@ static const NSTimeInterval kSecondsInOneDay = 24 * 60 * 60;
 }
 
 -(CPTLayer *)dataLabelForPlot:(CPTPlot *)plot recordIndex:(NSUInteger)index{
+
+    
+    if ([self.viewModel.barchartSuggestArray count] <= index){
+    
+        return (id)[NSNull null];
+    }
+    
+    if ([self.viewModel.barchartDrinkArray count] <= index){
+        
+        return (id)[NSNull null];
+    }
     
     CPTTextLayer *newLayer = nil;
     static CPTMutableTextStyle *whiteText = nil;
@@ -361,23 +374,15 @@ static const NSTimeInterval kSecondsInOneDay = 24 * 60 * 60;
         whiteText.color = [CPTColor whiteColor];
     });
     
-    
     NSInteger suggest = 0;
     NSInteger drink = 0;
     
-    if ([self.viewModel.barchartSuggestArray count] > index) {
-        
-       suggest = [self.viewModel.barchartSuggestArray[index] integerValue];
-    }
-    
-    if ([self.viewModel.barchartDrinkArray count] > index) {
-        
-        drink =  [self.viewModel.barchartDrinkArray[index] integerValue] / 1000.0;
-    }
-    
+    suggest = [self.viewModel.barchartSuggestArray[index] integerValue];
+    drink =  [self.viewModel.barchartDrinkArray[index] integerValue] / 1000.0;
+
     if ( [plot.identifier isEqual:CSTPlanBarPlotIdentifier] ) {
    
-        if (suggest > drink) {
+        if (suggest >= drink) {
             newLayer = [[CPTTextLayer alloc] initWithText:[NSString stringWithFormat:@"%lu", (unsigned long)suggest]
                                                 style:whiteText];
         }else{
@@ -387,7 +392,7 @@ static const NSTimeInterval kSecondsInOneDay = 24 * 60 * 60;
 
     }else if ([plot.identifier isEqual:CSTDrinkBarPlotIdentifier]){
         
-        if (drink > suggest) {
+        if (suggest < drink) {
             newLayer = [[CPTTextLayer alloc] initWithText:[NSString stringWithFormat:@"%lu", (unsigned long)drink]
                                                     style:whiteText];
         }else{
@@ -430,6 +435,28 @@ static const NSTimeInterval kSecondsInOneDay = 24 * 60 * 60;
 }
 
 
+#pragma mark - PlotSpace delegate
+
+- (CGPoint)plotSpace:(CPTPlotSpace *)space willDisplaceBy:(CGPoint)displacement {
+    
+    return CGPointMake(displacement.x, 0);
+}
+
+- (CPTPlotRange *)plotSpace:(CPTPlotSpace *)space willChangePlotRangeTo:(CPTPlotRange *)newRange forCoordinate:(CPTCoordinate)coordinate{
+    
+    return newRange;
+}
+
+
+- (void)plotSpace:(CPTPlotSpace *)space didChangePlotRangeForCoordinate:(CPTCoordinate)coordinate{
+
+    if (coordinate == CPTCoordinateX) {
+        
+        [self.timer invalidate];
+        self.timer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(p_plotViewScrollTimerFired:) userInfo:nil repeats:NO];
+    }
+}
+
 
 #pragma mark - Privte method
 
@@ -460,18 +487,12 @@ static const NSTimeInterval kSecondsInOneDay = 24 * 60 * 60;
         
         @strongify(self);
     
-//        if ([x count] >= 13) {
-//            
-//            self.collectionViewSelectedIndex = [x count] - 6 - 1;
-//        }else if ([x count] >= 7){
-//            self.collectionViewSelectedIndex = [x count] - 3 - 1;
-//        }
-        
         if ([x count] >= 7){
             self.collectionViewSelectedIndex = [x count] - 3 - 1;
         }
-
+        
         [self.collectionView reloadData];
+        
         [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:self.collectionViewSelectedIndex + 3 inSection:0] atScrollPosition:UICollectionViewScrollPositionRight animated:NO];
     }];
 }
@@ -499,7 +520,8 @@ static const NSTimeInterval kSecondsInOneDay = 24 * 60 * 60;
     self.plotHostingView.hostedGraph = self.plotGraph;
  
     CPTXYPlotSpace * plotSpace = (CPTXYPlotSpace *)self.plotGraph.defaultPlotSpace;
-    plotSpace.allowsUserInteraction = NO;
+    plotSpace.allowsUserInteraction = YES;
+    plotSpace.delegate = self;
     
     
     plotSpace.xRange = [CPTPlotRange plotRangeWithLocation:@0.0f length:@(kSecondsInOneDay * 6 )];
@@ -663,6 +685,11 @@ static const NSTimeInterval kSecondsInOneDay = 24 * 60 * 60;
 
 - (void)p_resetSymbolBySelectedIndexWithScatterPlot{
 
+    if ([self.viewModel.historyDrinkArray count] <= 0) {
+        
+        return;
+    }
+    
     self.oldSelectedIndex = self.selectedIndex;
     self.selectedIndex = self.collectionViewSelectedIndex - 3;
     self.selectedDate = [self.viewModel.historyDrinkArray[self.selectedIndex] valueForKey:@"date"];
@@ -672,6 +699,10 @@ static const NSTimeInterval kSecondsInOneDay = 24 * 60 * 60;
 
 - (void)p_resetXrangeBySelectedIndexWithScatterPlot{
 
+    if ([self.viewModel.historyDrinkArray count] <= 0) {
+        
+        return;
+    }
     
     CPTXYPlotSpace *plotSpace = (CPTXYPlotSpace *)self.plotGraph.defaultPlotSpace;
     
@@ -687,6 +718,10 @@ static const NSTimeInterval kSecondsInOneDay = 24 * 60 * 60;
 
 - (void)p_resetDrinkBarPlotBySelectedIndex{
 
+    if ([self.viewModel.historyDrinkArray count] == 0) {
+        
+        return;
+    }
     NSDate *date = [self.viewModel.historyDrinkArray[self.selectedIndex] valueForKey:@"date"];
     self.viewModel.barchartDrinkArray = [self.viewModel segmentArrayWithDetail:self.viewModel.historyDrinkDetail inDate:date];
     
@@ -694,11 +729,15 @@ static const NSTimeInterval kSecondsInOneDay = 24 * 60 * 60;
 }
 - (void)p_resetPlanBarPlotBySelectedIndex{
     
+    
+    if ([self.viewModel.historyDrinkArray count] <=0) {
+        
+        return;
+    }
     NSDate *date = [self.viewModel.historyDrinkArray[self.selectedIndex] valueForKey:@"date"];
     
     self.viewModel.barchartSuggestArray = [self.viewModel segmentArraywithSuggests:self.viewModel.historySuggestDrink inDate:date];
     
-  //  NSLog(@"suggest == %@",self.viewModel.barchartSuggestArray);
     [self.planBarPlot reloadData];
 }
 
@@ -840,6 +879,43 @@ static const NSTimeInterval kSecondsInOneDay = 24 * 60 * 60;
 - (void)p_share:(id)sender{
 
     [CSTUmeng  shareText:[self.viewModel todayUserDrinkShareText] image:[self.view cst_snapshotImage]presentSnsIconSheetView:self];
+}
+
+- (void)p_plotViewScrollTimerFired:(NSTimer *)timer{
+    
+    if ([self.viewModel.historyDrinkArray count] <= 0) {
+        
+        return;
+    }
+
+    CPTXYPlotSpace * plotSpace = (CPTXYPlotSpace *)self.plotGraph.defaultPlotSpace;
+    
+    double offset = [plotSpace.xRange.location doubleValue]/ kSecondsInOneDay;
+    
+    NSInteger index = offset - floor(offset) >= 0.5 ? ceil(offset) : floor(offset);
+    
+    if(index > (NSInteger)([self.viewModel.historyDrinkArray count] - 3 - 1)){
+        
+        index = [self.viewModel.historyDrinkArray count] - 3 - 1;
+        
+    }else if (index < -3){
+        index = -3;
+    }
+    CPTPlotRange *currentRange = [CPTPlotRange plotRangeWithLocation:@(index * kSecondsInOneDay) length:plotSpace.xRange.length];
+    
+    [CPTAnimation animate:plotSpace
+                 property:@"xRange"
+            fromPlotRange:plotSpace.xRange
+              toPlotRange:currentRange
+                 duration:0.2];
+    
+    NSIndexPath *indexPath = [NSIndexPath indexPathForItem:index + 6 inSection:0];
+    [self p_scrollCollectionViewBySelectedIndexWithIndexPath:indexPath];
+    [self p_resetSymbolBySelectedIndexWithScatterPlot];
+    [self p_loadDataWithTopDrinkLabel];
+    [self p_resetDrinkBarPlotBySelectedIndex];
+    [self p_resetPlanBarPlotBySelectedIndex];
+    
 }
 
 

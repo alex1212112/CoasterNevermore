@@ -141,9 +141,15 @@
 
 - (RACSignal *)deleteRelationshipSignal{
 
-    return [[CSTNetworkManager reachableSignal] flattenMap:^RACStream *(id value) {
+    return [[[CSTNetworkManager reachableSignal] flattenMap:^RACStream *(id value) {
         return [self p_deleteRelationshipSignal];
+    }] doError:^(NSError *error) {
         
+        if (error.code == CSTNotReachableCode){
+            [self p_showAlertViewWithTitle:@"无网络连接" content:@"请检查网络连接是否正常" buttonTitle:@"确定"];
+        }else{
+            [self p_showAlertViewWithTitle:@"解除绑定失败" content:@"有可能网络出现故障，请检查网络连接是否正常" buttonTitle:@"确定"];
+        }
     }];
 
 }

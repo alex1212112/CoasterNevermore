@@ -16,8 +16,7 @@
     
     self.tableView.separatorColor = [UIColor clearColor];
     self.tableView.showsVerticalScrollIndicator = NO;
-    self.tableView.scrollEnabled = NO;
-    
+    //self.tableView.scrollEnabled = NO;
 }
 
 

@@ -11,6 +11,7 @@
 #import "CSTRouter.h"
 #import "CSTDataManager.h"
 #import "CSTUserCenterTableViewModel.h"
+#import "CSTShowContentView.h"
 
 @interface CSTUserCenterTableViewController ()
 @property (weak, nonatomic) IBOutlet UIView *headerView;
@@ -39,6 +40,7 @@
     [self p_configTableFooterView];
     [self p_configTableView];
     [self p_configEventWithSignoutButton];
+    [self p_configEventWithNcoinsButton];
     [self p_configAvatarViewAfterViewDidLoad];
     [self p_configUsernameLabel];
     [self p_configNicknameLabel];
@@ -114,13 +116,42 @@
     [[self.signoutButton rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
         
         @strongify(self);
-
-        [CSTRouter routerToViewControllerType:CSTRouterViewControllerTypeLogin fromViewController:self.parentViewController];
         
-        [CSTDataManager removeAllData];
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"确定退出登录吗?" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+        
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+            
+        }];
+        
+        [alertController addAction:cancelAction];
+        
+        UIAlertAction *destructiveAction = [UIAlertAction actionWithTitle:@"退出" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+            
+            [CSTRouter routerToViewControllerType:CSTRouterViewControllerTypeLogin fromViewController:self.parentViewController];
+            
+            [CSTDataManager removeAllData];
+            
+        }];
+        
+        [alertController addAction:destructiveAction];
+        
+        [self presentViewController:alertController animated:YES completion:nil];
     }];
-    
 }
+
+- (void)p_configEventWithNcoinsButton{
+
+    [[self.coinDetailButton  rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
+        
+        CSTShowContentView *contentView = [[CSTShowContentView alloc] init];
+        contentView.title = @"Coaster 奈币系统筹备中，敬请期待！";
+        contentView.content = @"当 Coaster 监测到您健康饮水之后，即赠予您一枚奈币，奈币可在官网平台中兑换商品或者抵扣现金，具体以官网活动为准。";
+        contentView.image = [UIImage imageNamed:@"SmileFaceIcon"];
+        
+        [contentView show];
+    }];
+}
+
 
 - (void)p_configEventWithAvatarTap:(UITapGestureRecognizer *)tap{
 

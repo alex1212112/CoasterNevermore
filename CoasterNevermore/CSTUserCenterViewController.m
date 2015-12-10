@@ -13,6 +13,7 @@
 @interface CSTUserCenterViewController () <UIGestureRecognizerDelegate>
 
 @property (nonatomic, strong) UITapGestureRecognizer *tap;
+@property (nonatomic, strong) UIPanGestureRecognizer *pan;
 @property (weak, nonatomic) IBOutlet UIView *containerView;
 
 @end
@@ -29,6 +30,7 @@
     
     
     [self.view addGestureRecognizer:self.tap];
+    [self.view addGestureRecognizer:self.pan];
     //self.blurStyle = UIBlurEffectStyleLight;
 }
 
@@ -55,7 +57,11 @@
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
 {
-    if (touch.view == self.view) {
+    if (touch.view == self.view && gestureRecognizer == self.tap) {
+        return YES;
+    }
+    if (gestureRecognizer == self.pan) {
+        
         return YES;
     }
     return NO;
@@ -67,12 +73,30 @@
 
     @weakify(self);
     
-    [[_tap rac_gestureSignal]subscribeNext:^(id x) {
+    [[tap rac_gestureSignal]subscribeNext:^(id x) {
         
         @strongify(self);
         
         [CSTRouter disMissViewController:self];
     }];
+}
+
+- (void)p_configEventWithPan:(UIPanGestureRecognizer *)pan{
+
+    if (pan.state == UIGestureRecognizerStateBegan) {
+        return;
+    }
+    
+    if (pan.state == UIGestureRecognizerStateChanged) {
+    
+        CGPoint point = [pan translationInView:pan.view];
+        if (point.x < -20.0) {
+            
+            [CSTRouter disMissViewController:self];
+        }
+        [pan setTranslation:CGPointZero inView:pan.view];
+    }
+    
 }
 
 #pragma mark - Setters and getters
@@ -82,10 +106,22 @@
     if (!_tap) {
         
         _tap = [[UITapGestureRecognizer alloc] init];
+        [_tap requireGestureRecognizerToFail:self.pan];
         _tap.delegate = self;
         [self p_configEventWithTap:_tap];
     }
     
     return _tap;
 }
+
+- (UIPanGestureRecognizer *)pan{
+
+    if (!_pan) {
+        _pan = [[UIPanGestureRecognizer alloc] init];
+        _pan.delegate = self;
+        [_pan addTarget:self action:@selector(p_configEventWithPan:)];
+    }
+    return _pan;
+}
+
 @end

@@ -139,7 +139,7 @@ NSString *const CSTHistoryUserSuggestWaterKey = @"CSTHistoryUserSuggestWaterKey"
         
     }] flattenMap:^RACStream *(id value) {
         
-        if (self.todayUserSuggestWater > 0 &&  [[value valueForKeyPath:@"@sum.weight"] floatValue] / 1000.0 / (CGFloat)(self.todayUserSuggestWater) >= 0.6) {
+        if (self.todayUserSuggestWater > 0 &&  [[value valueForKeyPath:@"@sum.weight"] floatValue] / 1000.0 / (CGFloat)(self.todayUserSuggestWater) >= 0.4) {
          
             return [[self p_uploadNCoinsSignalWithNumber:1] merge:[[self p_uploadTodayHealthDrinkAPIManager] fetchDataSignal]];
         }

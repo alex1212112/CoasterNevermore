@@ -35,6 +35,7 @@
     self.window.rootViewController = [CSTRouter rootViewController];
     [self.window makeKeyAndVisible];
     
+    
     [CSTRouter shareRouter];
     [[CSTWeatherManager shareManager] findCurrentLocation];
     [[CSTNetworkManager shareManager] enable];

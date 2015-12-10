@@ -45,6 +45,13 @@
     [self.view addGestureRecognizer:self.tap];
 }
 
+- (void)viewWillAppear:(BOOL)animated{
+    
+    [super viewWillAppear:animated];
+    [self.viewModel refreshCurrentPageData];
+    [self p_configInviteOrCancelButtonAfterViewWillAppear];
+}
+
 
 #pragma mark - Private method
 
@@ -56,6 +63,13 @@
     [self p_configRefuseButton];
     [self p_configAcceptButton];
 
+}
+
+- (void)p_configInviteOrCancelButtonAfterViewWillAppear{
+
+    BOOL x = self.viewModel.relationship ? YES: [CSTValidateHelper isPhoneNumberValid:self.mateIDTextField.text];
+
+    self.inviteOrCancelButton.layer.borderColor = x ? [UIColor waveColor].CGColor : [UIColor lightGrayColor].CGColor;
 }
 
 - (void)p_configMateIDTextField{
@@ -105,17 +119,12 @@
         }
     }];
     
-    RACSignal *signal =[[self.mateIDTextField.rac_textSignal map:^id(id value) {
+    RACSignal *signal = [[RACSignal combineLatest:@[RACObserve(self.viewModel, relationship),self.mateIDTextField.rac_textSignal] reduce:^id(CSTRelationship *relationship, NSString *mateIDString){
+
+        return relationship ? @YES: @([CSTValidateHelper isPhoneNumberValid:self.mateIDTextField.text]);
         
-        @strongify(self);
-        if (!self.viewModel.relationship) {
-            return @([CSTValidateHelper isPhoneNumberValid:value]);
-        }else{
-            return @YES;
-        }
     }] doNext:^(id x) {
-        
-        self.inviteOrCancelButton.layer.borderColor = [x boolValue] ? [UIColor waveColor].CGColor : [UIColor lightGrayColor].CGColor;
+         self.inviteOrCancelButton.layer.borderColor = [x boolValue] ? [UIColor waveColor].CGColor : [UIColor lightGrayColor].CGColor;
     }];
     
     

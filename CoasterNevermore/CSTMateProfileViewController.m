@@ -120,16 +120,36 @@
     self.deleteButton.rac_command = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
         @strongify(self);
         
-        [self p_disableUserInteractionWithButton:self.deleteButton];
         
-        return [[[self.viewModel deleteRelationshipSignal] doNext:^(id x) {
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"确定解除绑定吗?" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+        
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+        
+        [alertController addAction:cancelAction];
+        
+        UIAlertAction *destructiveAction = [UIAlertAction actionWithTitle:@"解除绑定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
             
-            [self p_enanbleUserInteractionWithButton:self.deleteButton];
+            [self p_disableUserInteractionWithButton:self.deleteButton];
             
-        }] doError:^(NSError *error) {
+            [[[[self.viewModel deleteRelationshipSignal] doNext:^(id x) {
+                
+                [self p_enanbleUserInteractionWithButton:self.deleteButton];
+                
+            }] doError:^(NSError *error) {
+                
+                [self p_enanbleUserInteractionWithButton:self.deleteButton];
+                
+            }] subscribeNext:^(id x) {
+                
+            }];
             
-             [self p_enanbleUserInteractionWithButton:self.deleteButton];
         }];
+        
+        [alertController addAction:destructiveAction];
+        
+        [self presentViewController:alertController animated:YES completion:nil];
+        
+        return [RACSignal empty];
     }];
 }
 
@@ -195,14 +215,10 @@
         }
     }];
     
-    RACSignal *signal =[[self.mateIDTextField.rac_textSignal map:^id(id value) {
+    RACSignal *signal = [[RACSignal combineLatest:@[RACObserve(self.viewModel, relationship),self.mateIDTextField.rac_textSignal] reduce:^id(CSTRelationship *relationship, NSString *mateIDString){
         
-         @strongify(self);
-        if (!self.viewModel.relationship) {
-            return @([CSTValidateHelper isPhoneNumberValid:value]);
-        }else{
-            return @YES;
-        }
+        return relationship ? @YES: @([CSTValidateHelper isPhoneNumberValid:self.mateIDTextField.text]);
+        
     }] doNext:^(id x) {
         
         self.inviteOrCancelButton.layer.borderColor = [x boolValue] ? [UIColor waveColor].CGColor : [UIColor lightGrayColor].CGColor;

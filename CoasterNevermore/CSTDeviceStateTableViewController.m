@@ -12,6 +12,7 @@
 #import <ReactiveCocoa/ReactiveCocoa.h>
 #import "DXAlertView.h"
 #import "CSTBLEConnectViewController.h"
+#import "CSTUserAccessViewController.h"
 #import "CSTRouter.h"
 
 @interface CSTDeviceStateTableViewController ()
@@ -65,7 +66,13 @@
 
 - (void)p_backItemClicked:(id)sender{
 
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    if ([self.navigationController.viewControllers[0] isKindOfClass:[CSTUserAccessViewController class]]) {
+        
+        [CSTRouter routerToViewControllerType:CSTRouterViewControllerTypeMain fromViewController:self];
+    }else{
+        
+        [self.navigationController popToRootViewControllerAnimated:YES];
+    }
 }
 
 #pragma mark - Private method
@@ -79,6 +86,7 @@
     if ([self.navigationController.viewControllers[viewControllerCount - 2] isKindOfClass:[CSTBLEConnectViewController class]]) {
         
         
+        self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
         self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"BackIcon"] style:UIBarButtonItemStylePlain target:self action:@selector(p_backItemClicked:)];
     }
     
@@ -230,6 +238,7 @@
 
 - (void)p_configDeleteDeviceButton{
     
+    
     @weakify(self);
 
     RACSignal *signal =[self.viewModel verifyDeleteDeviceSignal];
@@ -238,17 +247,34 @@
         
         @strongify(self);
         
-        [self p_disableUserInterfaceWithButton:self.deleteDeviceButton];
-        return [[[self.viewModel deleteDeviceSignal] doNext:^(id x) {
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"确定解除绑定吗?" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+        
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+        
+        [alertController addAction:cancelAction];
+        
+        UIAlertAction *destructiveAction = [UIAlertAction actionWithTitle:@"解除绑定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
             
-            [CSTRouter routerToBLEConnectViewControllerFromDeviceStateTableViewController:self];
-            [self p_enableUserInterfaceWithButton:self.deleteDeviceButton];
+            [self p_disableUserInterfaceWithButton:self.deleteDeviceButton];
+             [[[[self.viewModel deleteDeviceSignal] doNext:^(id x) {
+                
+                [CSTRouter routerToBLEConnectViewControllerFromDeviceStateTableViewController:self];
+                [self p_enableUserInterfaceWithButton:self.deleteDeviceButton];
+                
+            }] doError:^(NSError *error) {
+                
+                [self p_showAlertViewWithTitle:@"解除绑定失败" titleColor:[UIColor  redColor] content:@"解除绑定失败，有可能网络出现问题，请检查网络病稍后再试" buttonTitle:@"确定"];
+                [self p_enableUserInterfaceWithButton:self.deleteDeviceButton];
+            }] subscribeNext:^(id x) {
+                
+            }];
             
-        }] doError:^(NSError *error) {
-            
-            [self p_showAlertViewWithTitle:@"解除绑定失败" titleColor:[UIColor  redColor] content:@"解除绑定失败，有可能网络出现问题，请检查网络病稍后再试" buttonTitle:@"确定"];
-            [self p_enableUserInterfaceWithButton:self.deleteDeviceButton];
         }];
+        
+        [alertController addAction:destructiveAction];
+        
+        [self presentViewController:alertController animated:YES completion:nil];
+        return [RACSignal empty];
     }];
 }
 

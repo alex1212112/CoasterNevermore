@@ -53,9 +53,7 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 
-//@property (weak, nonatomic) IBOutlet NSLayoutConstraint *topViewConstraintHeight;
-//@property (weak, nonatomic) IBOutlet NSLayoutConstraint *middleViewConstraintHeight;
-//@property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomViewConstraintHeight;
+
 @property (weak, nonatomic) IBOutlet UIButton *sendMessageButton;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *circleViewConstraintTop;
 @property (weak, nonatomic) IBOutlet UIView *whiteBgView;
@@ -104,7 +102,7 @@
 
 #pragma mark - Event response
 
-- (void)p_configEventWithMessageCancleButton{
+- (void)p_configEventWithMessageCancelButton{
 
     
     @weakify(self);
@@ -329,7 +327,7 @@
     
     RAC(self, messageLabel.text) = RACObserve(self.viewModel, remindMessage);
     
-    [self p_configEventWithMessageCancleButton];
+    [self p_configEventWithMessageCancelButton];
     
     if (self.viewModel.contentType == CSTContentTypeUser) {
         

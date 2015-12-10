@@ -478,9 +478,19 @@ const NSInteger CSTQQLoginErrorWrongParameterCode = 10030404;
 
 - (NSDictionary *)p_qqRegParametersWithQQToken:(NSDictionary *)dic username:(NSString *)username{
 
-    NSMutableDictionary *mutableDic = [NSMutableDictionary dictionaryWithDictionary:dic];
-    [mutableDic setObject:username forKey:@"userName"];
-    return [NSDictionary dictionaryWithDictionary:mutableDic];
+    if (!username) {
+        
+        return nil;
+    }
+    if (!dic[@"accessToken"]) {
+        
+        return nil;
+    }
+    
+    return @{@"userName" : username,
+             @"provider" : @"QQ",
+             @"externalAccessToken" :dic[@"accessToken"]
+             };
 }
 
 #pragma mark - QQ reg Coaster id
@@ -657,7 +667,7 @@ const NSInteger CSTQQLoginErrorWrongParameterCode = 10030404;
 
 - (void)p_showPWDAlert{
     
-    DXAlertView *alert = [[DXAlertView alloc] initWithTitle:@"请输入您Coaster账号的密码" contentText:@"输入Coaster账号的密码，就可与QQ账号关联" leftButtonTitle:@"取消" rightButtonTitle:@"确定" hasTextFiled:YES];
+    DXAlertView *alert = [[DXAlertView alloc] initWithTitle:@"输入Coaster的密码" contentText:@"输入Coaster账号的密码，就可与QQ账号关联" leftButtonTitle:@"取消" rightButtonTitle:@"确定" hasTextFiled:YES];
     
     [alert show];
     
@@ -680,6 +690,14 @@ const NSInteger CSTQQLoginErrorWrongParameterCode = 10030404;
                 
             }] doError:^(NSError *error) {
                 [MBProgressHUD hideAllHUDsForView:[UIApplication sharedApplication].keyWindow animated:NO];
+                
+                
+                NSData * data = error.userInfo[@"com.alamofire.serialization.response.error.data"];
+                
+                NSString *string = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+                NSLog(@"error == %@",string);
+                
+                
                 [self p_showAlertViewWithTitle:@"绑定失败" content:@"QQ号码与 Coaster 绑定失败" buttonTitle:@"确定"];
                 
             }] flattenMap:^RACStream *(id value) {
@@ -727,17 +745,32 @@ const NSInteger CSTQQLoginErrorWrongParameterCode = 10030404;
     CSTBind3rdPartyAPIManager *apiManager = [[CSTBind3rdPartyAPIManager alloc] init];
     apiManager.parameters = [self p_bind3rdPartyParametersWithQQToken:self.qqTokenParameters username:self.qqLoginPhone password:password];
     
+    
     return apiManager;
 }
 
 
 - (NSDictionary *)p_bind3rdPartyParametersWithQQToken:(NSDictionary *)qqToken username:(NSString *)username password:(NSString *)password{
 
-    NSMutableDictionary *mutableDic = [NSMutableDictionary dictionaryWithDictionary:qqToken];
-    [mutableDic setObject:username forKey:@"userName"];
-    [mutableDic setObject:password forKey:@"password"];
     
-    return [NSDictionary dictionaryWithDictionary:mutableDic];
+    if (!username) {
+        
+        return nil;
+    }
+    
+    if (!password) {
+        return nil;
+    }
+    if (!qqToken[@"accessToken"]) {
+        
+        return nil;
+    }
+    
+    return @{@"userName" : username,
+             @"password" : password,
+             @"provider" : @"QQ",
+             @"externalAccessToken" :qqToken[@"accessToken"]
+             };
     
 }
 

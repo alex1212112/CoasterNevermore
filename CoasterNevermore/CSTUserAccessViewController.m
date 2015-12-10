@@ -94,6 +94,7 @@
     self.usernameTextField.text = nil;
     self.passwordTextField.text = nil;
     self.verifiedCodeTextField.text = nil;
+    self.viewModel.accessType = CSTAccessTypeLogin;
 }
 
 - (void)viewDidAppear:(BOOL)animated

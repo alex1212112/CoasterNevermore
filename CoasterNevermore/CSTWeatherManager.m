@@ -214,7 +214,6 @@ static const CGFloat hh = 1.0;
          }
          self.cityName = cityName;
          
-         
          @weakify(self);
          if (subLocality) {
              
@@ -249,17 +248,16 @@ static const CGFloat hh = 1.0;
 }
 
 - (NSString *)p_standaredCityNameWithName:(NSString *)cityName{
-
-    NSString *result = nil;
     
     if ([cityName hasSuffix:@"市市辖区"]){
         
-        result = [cityName stringByReplacingCharactersInRange:(NSRange){cityName.length - 4, 4} withString:@""];
-    }else if ([cityName hasSuffix:@"区"] ||[cityName hasSuffix:@"市"] ||[cityName hasSuffix:@"州"] ) {
-        
-        result = [cityName stringByReplacingCharactersInRange:(NSRange){cityName.length - 1, 1} withString:@""];
+        return  [cityName stringByReplacingCharactersInRange:(NSRange){cityName.length - 4, 4} withString:@""];
     }
-    return result;
+    if ([cityName hasSuffix:@"区"] ||[cityName hasSuffix:@"市"] ||[cityName hasSuffix:@"州"] ) {
+        
+        return  [cityName stringByReplacingCharactersInRange:(NSRange){cityName.length - 1, 1} withString:@""];
+    }
+    return cityName;
 }
 
 
@@ -293,6 +291,10 @@ static const CGFloat hh = 1.0;
 
 - (CSTAQIAPIManager *)p_aqiAPIManagerWithCity:(NSString *)cityName{
 
+    if (!cityName) {
+        
+        return nil;
+    }
     CSTAQIAPIManager *apiManager = [[CSTAQIAPIManager alloc] init];
     apiManager.parameters = @{@"city" : cityName};
     

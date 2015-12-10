@@ -176,10 +176,11 @@ NSInteger const kShowDatesCount = 13;
 
     NSArray *timePointDateArray = [CSTDayPeriod cst_timePointDateArrayInDate:date];
     NSMutableArray *segmentArray = [NSMutableArray array];
+    
     [timePointDateArray enumerateObjectsUsingBlock:^(NSDate *date, NSUInteger idx, BOOL *stop) {
         
         NSDate *nextDate = timePointDateArray[idx + 1];
-        NSNumber *segmentDrinkWeight = [CSTDayPeriod cst_drinkBetweenDate:date andDate:nextDate withDrinkArray:selectedArray];
+        NSNumber *segmentDrinkWeight = [CSTDayPeriod cst_drinkBetweenDate:date andDate:nextDate withDrinkArray:selectedArray] ?: @(0);
         
         [segmentArray addObject:segmentDrinkWeight];
         
@@ -399,7 +400,7 @@ NSInteger const kShowDatesCount = 13;
         
         NSArray *array = value[@"Summary"];
         
-       return  [RACSignal cst_transformToModelArraySignalWithModelClass:[CSTHealthDrink class] dicArray:array];
+        return  [RACSignal cst_transformToModelArraySignalWithModelClass:[CSTHealthDrink class] dicArray:array];
         
     }] doNext:^(id x) {
         
@@ -448,14 +449,14 @@ NSInteger const kShowDatesCount = 13;
 }
 
 
-- (CSTUploadHealthDrinkAPIManager *)p_uploadHealthDrinkAPIManager{
-
-    CSTUploadHealthDrinkAPIManager *apiManager = [[CSTUploadHealthDrinkAPIManager alloc] init];
-    
-    apiManager.parameters = @{@"datetime" : @"2015-07-12 12:25:21"};
-    
-    return apiManager;
-}
+//- (CSTUploadHealthDrinkAPIManager *)p_uploadHealthDrinkAPIManager{
+//
+//    CSTUploadHealthDrinkAPIManager *apiManager = [[CSTUploadHealthDrinkAPIManager alloc] init];
+//    
+//    apiManager.parameters = @{@"datetime" : @"2015-07-12 12:25:21"};
+//    
+//    return apiManager;
+//}
 
 #pragma mark - User history suggest drink
 
