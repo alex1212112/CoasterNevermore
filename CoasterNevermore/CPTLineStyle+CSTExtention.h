@@ -8,6 +8,7 @@
 
 #import <CorePlot/CorePlot-CocoaTouch.h>
 
+
 @interface CPTLineStyle (CSTExtention)
 
 + (CPTLineStyle *)cst_linestyleWithColor:(CPTColor *)color width:(CGFloat)lineWidth;

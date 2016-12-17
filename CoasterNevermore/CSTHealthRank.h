@@ -8,6 +8,7 @@
 
 #import <Mantle/Mantle.h>
 
+
 @interface CSTHealthRank : MTLModel <MTLJSONSerializing>
 
 @property (nonatomic, copy) NSNumber *score;

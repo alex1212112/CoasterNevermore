@@ -1,5 +1,8 @@
+#ifdef __OBJC__
 #import <UIKit/UIKit.h>
+#endif
 
+#import "LinqToObjectiveC.h"
 #import "NSArray+LinqExtensions.h"
 #import "NSDictionary+LinqExtensions.h"
 

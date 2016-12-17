@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		40A35C68C32BD2CAC756466A /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C6A8183D5437ABE740D8374 /* Pods.framework */; };
+		3ED390C1DBF11E851EB2F7FC /* Pods_CoasterNevermore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4867ABF11AB97F83094097A6 /* Pods_CoasterNevermore.framework */; };
 		70001A3D1B2C651200BB70A4 /* CSTUserAccessViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 70001A3C1B2C651200BB70A4 /* CSTUserAccessViewModel.m */; };
 		700B2DC41B625DBA00F7E1CF /* CSTHealthDrink.m in Sources */ = {isa = PBXBuildFile; fileRef = 700B2DC31B625DBA00F7E1CF /* CSTHealthDrink.m */; };
 		700B2DF01B661E5E00F7E1CF /* CPTLineStyle+CSTExtention.m in Sources */ = {isa = PBXBuildFile; fileRef = 700B2DEF1B661E5E00F7E1CF /* CPTLineStyle+CSTExtention.m */; };
@@ -164,6 +164,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4867ABF11AB97F83094097A6 /* Pods_CoasterNevermore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CoasterNevermore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C6A8183D5437ABE740D8374 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		70001A3B1B2C651200BB70A4 /* CSTUserAccessViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSTUserAccessViewModel.h; sourceTree = "<group>"; };
 		70001A3C1B2C651200BB70A4 /* CSTUserAccessViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSTUserAccessViewModel.m; sourceTree = "<group>"; };
@@ -443,8 +444,8 @@
 		70F62E2D1B5F5D4A008AC862 /* CSTDetailTableViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSTDetailTableViewModel.m; sourceTree = "<group>"; };
 		70F62E2F1B613B0A008AC862 /* CSTHealthRank.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSTHealthRank.h; sourceTree = "<group>"; };
 		70F62E301B613B0A008AC862 /* CSTHealthRank.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSTHealthRank.m; sourceTree = "<group>"; };
-		74FC328497DB65E8EACB0BFA /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
-		D8B52E392BF1525D4D4FEA74 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		A538ED1CADF17696CEB12D79 /* Pods-CoasterNevermore.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CoasterNevermore.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CoasterNevermore/Pods-CoasterNevermore.debug.xcconfig"; sourceTree = "<group>"; };
+		F39DBCF8D854115D5041C667 /* Pods-CoasterNevermore.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CoasterNevermore.release.xcconfig"; path = "Pods/Target Support Files/Pods-CoasterNevermore/Pods-CoasterNevermore.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -466,8 +467,8 @@
 				70637F001B70A67C00BDB366 /* libiconv.dylib in Frameworks */,
 				709F0FA01BDBA7F9001D8067 /* libUMSocial_Sdk_4.2.5.a in Frameworks */,
 				70637EFE1B70A66600BDB366 /* Security.framework in Frameworks */,
-				40A35C68C32BD2CAC756466A /* Pods.framework in Frameworks */,
 				709F0FB91BDBA875001D8067 /* libSocialQQ.a in Frameworks */,
+				3ED390C1DBF11E851EB2F7FC /* Pods_CoasterNevermore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -509,8 +510,8 @@
 				703B6E281B2AD423006852C3 /* CoasterNevermore */,
 				703B6E421B2AD423006852C3 /* CoasterNevermoreTests */,
 				703B6E271B2AD423006852C3 /* Products */,
-				E6376A6EFF0D9797F267E65F /* Pods */,
 				E6D608AEC925FF956AC8C16F /* Frameworks */,
+				8BF1BA458CAF4152B843E9C2 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1145,11 +1146,11 @@
 			name = DetailTableViewController;
 			sourceTree = "<group>";
 		};
-		E6376A6EFF0D9797F267E65F /* Pods */ = {
+		8BF1BA458CAF4152B843E9C2 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				74FC328497DB65E8EACB0BFA /* Pods.debug.xcconfig */,
-				D8B52E392BF1525D4D4FEA74 /* Pods.release.xcconfig */,
+				A538ED1CADF17696CEB12D79 /* Pods-CoasterNevermore.debug.xcconfig */,
+				F39DBCF8D854115D5041C667 /* Pods-CoasterNevermore.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -1166,6 +1167,7 @@
 				70637EFF1B70A67C00BDB366 /* libiconv.dylib */,
 				70637EFD1B70A66600BDB366 /* Security.framework */,
 				6C6A8183D5437ABE740D8374 /* Pods.framework */,
+				4867ABF11AB97F83094097A6 /* Pods_CoasterNevermore.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1177,12 +1179,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 703B6E491B2AD423006852C3 /* Build configuration list for PBXNativeTarget "CoasterNevermore" */;
 			buildPhases = (
-				FD998E1826F0E78CF5F0790B /* Check Pods Manifest.lock */,
+				6CA6D43D549624A6CAF9A6CB /* [CP] Check Pods Manifest.lock */,
 				703B6E221B2AD423006852C3 /* Sources */,
 				703B6E231B2AD423006852C3 /* Frameworks */,
 				703B6E241B2AD423006852C3 /* Resources */,
-				53D8201D8E64B3A82C9571DF /* Copy Pods Resources */,
-				128A7A9087D22DA0C16C214C /* Embed Pods Frameworks */,
+				5392BE8EC16596466352BB9B /* [CP] Embed Pods Frameworks */,
+				F1840DD709406517B93B6055 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1223,6 +1225,7 @@
 					703B6E251B2AD423006852C3 = {
 						CreatedOnToolsVersion = 6.3.2;
 						DevelopmentTeam = NBLF4TFQN6;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -1293,49 +1296,49 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		128A7A9087D22DA0C16C214C /* Embed Pods Frameworks */ = {
+		5392BE8EC16596466352BB9B /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Embed Pods Frameworks";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CoasterNevermore/Pods-CoasterNevermore-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		53D8201D8E64B3A82C9571DF /* Copy Pods Resources */ = {
+		6CA6D43D549624A6CAF9A6CB /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		FD998E1826F0E78CF5F0790B /* Check Pods Manifest.lock */ = {
+		F1840DD709406517B93B6055 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CoasterNevermore/Pods-CoasterNevermore-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -1620,12 +1623,13 @@
 		};
 		703B6E4A1B2AD423006852C3 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 74FC328497DB65E8EACB0BFA /* Pods.debug.xcconfig */;
+			baseConfigurationReference = A538ED1CADF17696CEB12D79 /* Pods-CoasterNevermore.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Guohua Ren (NBLF4TFQN6)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Guohua Ren (NBLF4TFQN6)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/CoasterNevermore/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
@@ -1643,18 +1647,19 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.nevermore.Coaster;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "63e968c0-ecd8-4b80-a511-d1ac20bb391a";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
 		703B6E4B1B2AD423006852C3 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D8B52E392BF1525D4D4FEA74 /* Pods.release.xcconfig */;
+			baseConfigurationReference = F39DBCF8D854115D5041C667 /* Pods-CoasterNevermore.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Guohua Ren (NBLF4TFQN6)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Guohua Ren (NBLF4TFQN6)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/CoasterNevermore/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
@@ -1672,7 +1677,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.nevermore.Coaster;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "63e968c0-ecd8-4b80-a511-d1ac20bb391a";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
