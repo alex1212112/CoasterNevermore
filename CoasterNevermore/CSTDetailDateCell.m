@@ -24,7 +24,8 @@
 #pragma mark - Life cycle
 
 - (void)awakeFromNib{
-
+    
+    [super awakeFromNib];
     [self p_configTitleLabel];
     [self p_configCircleImageView];
     

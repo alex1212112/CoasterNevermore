@@ -47,6 +47,7 @@
 
 - (void)awakeFromNib
 {
+    [super awakeFromNib];
     self.nomalPicker.delegate = self;
     [self p_configFamaleButtonEvent];
     [self p_configMaleButtonEvent];
