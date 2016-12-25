@@ -444,6 +444,7 @@
 		70F62E2D1B5F5D4A008AC862 /* CSTDetailTableViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSTDetailTableViewModel.m; sourceTree = "<group>"; };
 		70F62E2F1B613B0A008AC862 /* CSTHealthRank.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSTHealthRank.h; sourceTree = "<group>"; };
 		70F62E301B613B0A008AC862 /* CSTHealthRank.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSTHealthRank.m; sourceTree = "<group>"; };
+		9A7479AD1E0F7B930063A99C /* CoasterNevermore.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CoasterNevermore.entitlements; sourceTree = "<group>"; };
 		A538ED1CADF17696CEB12D79 /* Pods-CoasterNevermore.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CoasterNevermore.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CoasterNevermore/Pods-CoasterNevermore.debug.xcconfig"; sourceTree = "<group>"; };
 		F39DBCF8D854115D5041C667 /* Pods-CoasterNevermore.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CoasterNevermore.release.xcconfig"; path = "Pods/Target Support Files/Pods-CoasterNevermore/Pods-CoasterNevermore.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -527,6 +528,7 @@
 		703B6E281B2AD423006852C3 /* CoasterNevermore */ = {
 			isa = PBXGroup;
 			children = (
+				9A7479AD1E0F7B930063A99C /* CoasterNevermore.entitlements */,
 				703B6E2D1B2AD423006852C3 /* AppDelegate.h */,
 				703B6E2E1B2AD423006852C3 /* AppDelegate.m */,
 				704BF6621B7BA5C800F1C27E /* WechatInfoViewController */,
@@ -1230,6 +1232,9 @@
 							com.apple.BackgroundModes = {
 								enabled = 1;
 							};
+							com.apple.Push = {
+								enabled = 1;
+							};
 						};
 					};
 					703B6E3E1B2AD423006852C3 = {
@@ -1628,6 +1633,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CODE_SIGN_ENTITLEMENTS = CoasterNevermore/CoasterNevermore.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Guohua Ren (NBLF4TFQN6)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1658,6 +1664,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CODE_SIGN_ENTITLEMENTS = CoasterNevermore/CoasterNevermore.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Guohua Ren (NBLF4TFQN6)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
