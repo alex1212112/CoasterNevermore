@@ -26,7 +26,6 @@
 		7049564D1B2D51B700244CE7 /* CSTFindPasswordViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7049564C1B2D51B700244CE7 /* CSTFindPasswordViewModel.m */; };
 		704956511B2D5A1B00244CE7 /* UIViewController+CSTDismissKeyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 704956501B2D5A1B00244CE7 /* UIViewController+CSTDismissKeyboard.m */; };
 		704956541B2EE4CC00244CE7 /* CSTAPIBaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 704956531B2EE4CC00244CE7 /* CSTAPIBaseManager.m */; };
-		704BF6381B79DD6600F1C27E /* libPushSDK-1.8.5.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 704BF6371B79DD6600F1C27E /* libPushSDK-1.8.5.a */; };
 		704BF6401B79F67D00F1C27E /* CSTWillBindMateViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 704BF63F1B79F67D00F1C27E /* CSTWillBindMateViewModel.m */; };
 		704BF6441B7B0A8700F1C27E /* CSTLocalNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 704BF6431B7B0A8700F1C27E /* CSTLocalNotification.m */; };
 		704BF6491B7B0C5D00F1C27E /* CSTDayPeriod.m in Sources */ = {isa = PBXBuildFile; fileRef = 704BF6461B7B0C5D00F1C27E /* CSTDayPeriod.m */; };
@@ -151,6 +150,13 @@
 		70F62E2B1B5F5C8F008AC862 /* CSTDetailDataViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 70F62E2A1B5F5C8F008AC862 /* CSTDetailDataViewModel.m */; };
 		70F62E2E1B5F5D4A008AC862 /* CSTDetailTableViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 70F62E2D1B5F5D4A008AC862 /* CSTDetailTableViewModel.m */; };
 		70F62E311B613B0A008AC862 /* CSTHealthRank.m in Sources */ = {isa = PBXBuildFile; fileRef = 70F62E301B613B0A008AC862 /* CSTHealthRank.m */; };
+		9A7479B11E0FE8630063A99C /* jcore-ios-1.0.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A7479AE1E0FE8630063A99C /* jcore-ios-1.0.0.a */; };
+		9A7479B21E0FE8630063A99C /* jpush-ios-3.0.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A7479AF1E0FE8630063A99C /* jpush-ios-3.0.0.a */; };
+		9A7479B41E0FF1570063A99C /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A7479B31E0FF1570063A99C /* libz.tbd */; };
+		9A7479B61E0FF17F0063A99C /* libresolv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A7479B51E0FF17F0063A99C /* libresolv.tbd */; };
+		9A7479B81E0FF18E0063A99C /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A7479B71E0FF18E0063A99C /* UserNotifications.framework */; };
+		9A7479BA1E0FF1C60063A99C /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A7479B91E0FF1C60063A99C /* CFNetwork.framework */; };
+		9A7479BC1E0FF1E40063A99C /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A7479BB1E0FF1E40063A99C /* CoreFoundation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -203,8 +209,6 @@
 		704956501B2D5A1B00244CE7 /* UIViewController+CSTDismissKeyboard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+CSTDismissKeyboard.m"; sourceTree = "<group>"; };
 		704956521B2EE4CC00244CE7 /* CSTAPIBaseManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSTAPIBaseManager.h; sourceTree = "<group>"; };
 		704956531B2EE4CC00244CE7 /* CSTAPIBaseManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSTAPIBaseManager.m; sourceTree = "<group>"; };
-		704BF6361B79DD6600F1C27E /* APService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APService.h; sourceTree = "<group>"; };
-		704BF6371B79DD6600F1C27E /* libPushSDK-1.8.5.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libPushSDK-1.8.5.a"; sourceTree = "<group>"; };
 		704BF63E1B79F67D00F1C27E /* CSTWillBindMateViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSTWillBindMateViewModel.h; sourceTree = "<group>"; };
 		704BF63F1B79F67D00F1C27E /* CSTWillBindMateViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSTWillBindMateViewModel.m; sourceTree = "<group>"; };
 		704BF6421B7B0A8700F1C27E /* CSTLocalNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSTLocalNotification.h; sourceTree = "<group>"; };
@@ -445,6 +449,14 @@
 		70F62E2F1B613B0A008AC862 /* CSTHealthRank.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSTHealthRank.h; sourceTree = "<group>"; };
 		70F62E301B613B0A008AC862 /* CSTHealthRank.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSTHealthRank.m; sourceTree = "<group>"; };
 		9A7479AD1E0F7B930063A99C /* CoasterNevermore.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CoasterNevermore.entitlements; sourceTree = "<group>"; };
+		9A7479AE1E0FE8630063A99C /* jcore-ios-1.0.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "jcore-ios-1.0.0.a"; sourceTree = "<group>"; };
+		9A7479AF1E0FE8630063A99C /* jpush-ios-3.0.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "jpush-ios-3.0.0.a"; sourceTree = "<group>"; };
+		9A7479B01E0FE8630063A99C /* JPUSHService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JPUSHService.h; sourceTree = "<group>"; };
+		9A7479B31E0FF1570063A99C /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		9A7479B51E0FF17F0063A99C /* libresolv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.tbd; path = usr/lib/libresolv.tbd; sourceTree = SDKROOT; };
+		9A7479B71E0FF18E0063A99C /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
+		9A7479B91E0FF1C60063A99C /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		9A7479BB1E0FF1E40063A99C /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		A538ED1CADF17696CEB12D79 /* Pods-CoasterNevermore.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CoasterNevermore.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CoasterNevermore/Pods-CoasterNevermore.debug.xcconfig"; sourceTree = "<group>"; };
 		F39DBCF8D854115D5041C667 /* Pods-CoasterNevermore.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CoasterNevermore.release.xcconfig"; path = "Pods/Target Support Files/Pods-CoasterNevermore/Pods-CoasterNevermore.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -454,11 +466,17 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9A7479BC1E0FF1E40063A99C /* CoreFoundation.framework in Frameworks */,
+				9A7479BA1E0FF1C60063A99C /* CFNetwork.framework in Frameworks */,
+				9A7479B81E0FF18E0063A99C /* UserNotifications.framework in Frameworks */,
+				9A7479B61E0FF17F0063A99C /* libresolv.tbd in Frameworks */,
+				9A7479B41E0FF1570063A99C /* libz.tbd in Frameworks */,
 				70637F0C1B70A6FB00BDB366 /* libz.dylib in Frameworks */,
 				709F0FBC1BDBA875001D8067 /* libSocialWechat.a in Frameworks */,
 				709F0FBD1BDBA875001D8067 /* libWeChatSDK.a in Frameworks */,
-				704BF6381B79DD6600F1C27E /* libPushSDK-1.8.5.a in Frameworks */,
 				709F0F831BDBA7C6001D8067 /* libMobClickLibrary.a in Frameworks */,
+				9A7479B11E0FE8630063A99C /* jcore-ios-1.0.0.a in Frameworks */,
+				9A7479B21E0FE8630063A99C /* jpush-ios-3.0.0.a in Frameworks */,
 				70637F0A1B70A6F000BDB366 /* libstdc++.dylib in Frameworks */,
 				70637F081B70A6DC00BDB366 /* CoreTelephony.framework in Frameworks */,
 				709F0FBA1BDBA875001D8067 /* TencentOpenAPI.framework in Frameworks */,
@@ -653,8 +671,9 @@
 		704BF6351B79DD6600F1C27E /* JPushLib */ = {
 			isa = PBXGroup;
 			children = (
-				704BF6361B79DD6600F1C27E /* APService.h */,
-				704BF6371B79DD6600F1C27E /* libPushSDK-1.8.5.a */,
+				9A7479AE1E0FE8630063A99C /* jcore-ios-1.0.0.a */,
+				9A7479AF1E0FE8630063A99C /* jpush-ios-3.0.0.a */,
+				9A7479B01E0FE8630063A99C /* JPUSHService.h */,
 			);
 			path = JPushLib;
 			sourceTree = "<group>";
@@ -1160,6 +1179,11 @@
 		E6D608AEC925FF956AC8C16F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9A7479BB1E0FF1E40063A99C /* CoreFoundation.framework */,
+				9A7479B91E0FF1C60063A99C /* CFNetwork.framework */,
+				9A7479B71E0FF18E0063A99C /* UserNotifications.framework */,
+				9A7479B51E0FF17F0063A99C /* libresolv.tbd */,
+				9A7479B31E0FF1570063A99C /* libz.tbd */,
 				70637F0B1B70A6FB00BDB366 /* libz.dylib */,
 				70637F091B70A6F000BDB366 /* libstdc++.dylib */,
 				70637F071B70A6DC00BDB366 /* CoreTelephony.framework */,

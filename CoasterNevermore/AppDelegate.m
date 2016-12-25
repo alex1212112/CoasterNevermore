@@ -86,6 +86,12 @@
     
     [CSTJPushManager handleRemoteNotification:userInfo];
 }
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
+    
+    // Required, iOS 7 Support
+    [CSTJPushManager handleRemoteNotification:userInfo];
+    completionHandler(UIBackgroundFetchResultNewData);
+}
 
 - (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification
 {
