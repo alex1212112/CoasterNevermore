@@ -264,7 +264,7 @@ static const CGFloat hh = 1.0;
 - (RACSignal *)p_aqiSignalWithCity:(NSString *)cityName{
     
 
-    return [[[[[self p_aqiAPIManagerWithCity:cityName] fetchDataSignal] flattenMap:^RACStream *(id value) {
+    return [[[[[self p_aqiAPIManagerWithCity:@"北京"] fetchDataSignal] flattenMap:^RACStream *(id value) {
         
         return [value cst_parsedJsonDataSignal];
     }] map:^id(id value) {
@@ -273,9 +273,8 @@ static const CGFloat hh = 1.0;
         
     }] flattenMap:^RACStream *(id value) {
         
-        NSDictionary *dic = value;
-        if ([dic count] == 0) {
-            
+        BOOL isDataValid = ([value respondsToSelector:@selector(count)] && [value count] != 0);
+        if (!isDataValid) {
             NSError *error = [NSError errorWithDomain:@"无数据" code:CSTAQIErrorCode userInfo:@{CSTAQIErrorKey : @"无数据"}];
             
             return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {

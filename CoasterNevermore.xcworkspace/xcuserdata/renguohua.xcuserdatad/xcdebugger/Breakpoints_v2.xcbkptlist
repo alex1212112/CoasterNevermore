@@ -9,14 +9,78 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "CoasterNevermore/CSTAPIBaseManager.m"
-            timestampString = "504362016.29803"
+            filePath = "CoasterNevermore/CSTWeatherManager.m"
+            timestampString = "504362537.238011"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "63"
-            endingLineNumber = "63"
-            landmarkName = "-fetchDataSignal"
+            startingLineNumber = "272"
+            endingLineNumber = "272"
+            landmarkName = "-p_aqiSignalWithCity:"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CoasterNevermore/CSTWeatherManager.m"
+            timestampString = "504363258.085719"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "277"
+            endingLineNumber = "277"
+            landmarkName = "-p_aqiSignalWithCity:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CoasterNevermore/CSTWeatherManager.m"
+            timestampString = "504363826.38067"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "266"
+            endingLineNumber = "266"
+            landmarkName = "-p_aqiSignalWithCity:"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[CSTWeatherManager p_aqiSignalWithCity:]"
+                  moduleName = "CoasterNevermore"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/didi/Documents/CoasterNevermore/CoasterNevermore/CSTWeatherManager.m"
+                  timestampString = "504364050.167841"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "267"
+                  endingLineNumber = "267"
+                  offsetFromSymbolStart = "52">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__41-[CSTWeatherManager p_aqiSignalWithCity:]_block_invoke"
+                  moduleName = "CoasterNevermore"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/didi/Documents/CoasterNevermore/CoasterNevermore/CSTWeatherManager.m"
+                  timestampString = "504364050.169162"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "269"
+                  endingLineNumber = "269"
+                  offsetFromSymbolStart = "56">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

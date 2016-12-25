@@ -27,8 +27,8 @@
                 {
                     if ([(NSString* )key rangeOfString:@"."].location != NSNotFound) {
                         
-                       NSString *newKey = [(NSString *)key stringByReplacingOccurrencesOfString:@"." withString:@""];
-                        [mutableDictionary setObject:obj forKey:newKey];
+                       NSString *currentKey = [(NSString *)key stringByReplacingOccurrencesOfString:@"." withString:@""];
+                        [mutableDictionary setObject:obj forKey:currentKey];
                     }
                 }
             }];
