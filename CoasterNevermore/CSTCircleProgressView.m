@@ -200,7 +200,7 @@
 @end
 
 
-@interface CSTCircleProgressView ()
+@interface CSTCircleProgressView ()<CAAnimationDelegate>
 
 @end
 
