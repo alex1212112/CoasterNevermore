@@ -165,7 +165,7 @@ static CSTLocalNotification *instance = nil;
     [[UIApplication sharedApplication] cancelAllLocalNotifications];
     long count;
     while ((count = [[[UIApplication sharedApplication] scheduledLocalNotifications] count]) > 0) {
-        NSLog(@"Remaining notificaitons to cancel: %lu",(unsigned long)count);
+//        NSLog(@"Remaining notificaitons to cancel: %lu",(unsigned long)count);
         [NSThread sleepForTimeInterval:.01f];
     }
 }
@@ -211,7 +211,7 @@ static CSTLocalNotification *instance = nil;
     {
         return;
     }
-    NSLog(@"near == %@",nearestNotification.fireDate);
+//    NSLog(@"near == %@",nearestNotification.fireDate);
     NSDate *todayNearestFireDate = [CSTLocalNotification todayDateWithTimeOfOtherDate:nearestNotification.fireDate];
     
     CSTDayPeriod *nearestFireDateBelongPeriod = [CSTDayPeriod cst_periodWithDate:todayNearestFireDate];
@@ -225,7 +225,7 @@ static CSTLocalNotification *instance = nil;
     
     if ([CSTDataManager shareManager].userCurrentPeriodDrinkPercentState  == CSTUserCurrentPeriodDrinkPercentStateOverhundred)
     {
-         NSLog(@"100%%");
+//         NSLog(@"100%%");
         if (self.localNotificationSetting == CSTLocalNotificationSettingAlways)
         {
             [self resetLocalNotificationByOverFifityWithNotification:nearestNotification];
@@ -239,14 +239,14 @@ static CSTLocalNotification *instance = nil;
     
     if ([CSTDataManager shareManager].userCurrentPeriodDrinkPercentState  == CSTUserCurrentPeriodDrinkPercentStateFifityToHundred)
     {
-        NSLog(@"50%%-100%%");
+//        NSLog(@"50%%-100%%");
         [self resetLocalNotificationByOverFifityWithNotification:nearestNotification];
         return;
     }
     
     if ([CSTDataManager shareManager].userCurrentPeriodDrinkPercentState  == CSTUserCurrentPeriodDrinkPercentStateZeroToFifty)
     {
-         NSLog(@"0%%-50%%");
+//         NSLog(@"0%%-50%%");
         [self resetAllLocalNotificationsToDefault];
         return;
     }
