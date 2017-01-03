@@ -182,7 +182,7 @@
         
         [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
             
-            [self.view layoutIfNeeded];
+//            [self.view layoutIfNeeded];
             self.reScanButton.alpha = 1;
             
         } completion:^(BOOL finished) {
@@ -212,7 +212,7 @@
         
         [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
             
-            [self.view layoutIfNeeded];
+//            [self.view layoutIfNeeded];
             self.reScanButton.alpha = 0;
         } completion:^(BOOL finished) {
             
