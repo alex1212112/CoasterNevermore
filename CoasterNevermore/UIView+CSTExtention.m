@@ -13,7 +13,7 @@
 - (UIImage *)cst_snapshotImage{
 
     UIGraphicsBeginImageContextWithOptions(self.bounds.size, self.opaque, 0.0f);
-    [self drawViewHierarchyInRect:self.bounds afterScreenUpdates:NO];
+    [self drawViewHierarchyInRect:self.bounds afterScreenUpdates:YES];
     UIImage * snapshotImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     return snapshotImage;

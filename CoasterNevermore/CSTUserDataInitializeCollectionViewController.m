@@ -211,7 +211,7 @@ static NSString * const reuseIdentifier = @"InitialDataCell";
         
         [NSLayoutConstraint deactivateConstraints:self.allButtonsConstraints];
         [NSLayoutConstraint activateConstraints:self.forwardButtonConstraints];
-        [self.view layoutIfNeeded];
+        [self.view layoutSubviews];
         return;
     }
     
@@ -219,7 +219,7 @@ static NSString * const reuseIdentifier = @"InitialDataCell";
         
         [NSLayoutConstraint deactivateConstraints:self.forwardButtonConstraints];
         [NSLayoutConstraint activateConstraints:self.allButtonsConstraints];
-        [self.view layoutIfNeeded];
+        [self.view layoutSubviews];
         return;
     }
 }

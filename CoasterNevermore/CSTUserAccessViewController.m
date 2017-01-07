@@ -630,7 +630,7 @@
         {
             [UIView animateWithDuration:0.3 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
                 
-                [self.view layoutIfNeeded];
+                [self.view layoutSubviews];
                 self.passwordTextField.rightView.alpha = 0.0;
                 [self p_configBottomViewsWithAlpha:0.0];
                 
@@ -641,13 +641,13 @@
                 [self.doneButton setTitle:@"注册" forState:UIControlStateNormal];
                 self.doneButton.enabled = NO;
                 self.doneButton.layer.borderColor = [UIColor lightGrayColor].CGColor;
-                [self.doneButton layoutIfNeeded];
+                [self.doneButton layoutSubviews];
                 [UIView setAnimationsEnabled:YES];
             }];
         }
         else
         {
-            [self.view layoutIfNeeded];
+            [self.view layoutSubviews];
             self.passwordTextField.rightView.alpha = 0.0;
             self.passwordTextField.rightView.hidden = YES;
             [self p_configBottomViewsWithAlpha:0.0];
@@ -656,7 +656,7 @@
             [self.doneButton setTitle:@"注册" forState:UIControlStateNormal];
             self.doneButton.enabled = NO;
             self.doneButton.layer.borderColor = [UIColor lightGrayColor].CGColor;
-            [self.doneButton layoutIfNeeded];
+            [self.doneButton layoutSubviews];
             [UIView setAnimationsEnabled:YES];
         }
     }
@@ -699,7 +699,7 @@
         {
             [UIView animateWithDuration:0.3 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
                 
-                [self.view layoutIfNeeded];
+                [self.view layoutSubviews];
                 self.passwordTextField.rightView.alpha = 1.0;
                 [self p_configBottomViewsWithAlpha:1.0];
             } completion:^(BOOL finished) {
@@ -708,20 +708,20 @@
                 [self.doneButton setTitle:@"登录" forState:UIControlStateNormal];
                 self.doneButton.enabled = NO;
                 self.doneButton.layer.borderColor = [UIColor lightGrayColor].CGColor;
-                [self.doneButton layoutIfNeeded];
+                [self.doneButton layoutSubviews];
                 [UIView setAnimationsEnabled:YES];
             }];
         }
         else
         {
-            [self.view layoutIfNeeded];
+            [self.view layoutSubviews];
             self.passwordTextField.rightView.alpha = 1.0;
             [self p_configBottomViewsWithAlpha:1.0];
             [UIView setAnimationsEnabled:NO];
             [self.doneButton setTitle:@"登录" forState:UIControlStateNormal];
             self.doneButton.enabled = NO;
             self.doneButton.layer.borderColor = [UIColor lightGrayColor].CGColor;
-            [self.doneButton layoutIfNeeded];
+            [self.doneButton layoutSubviews];
             [UIView setAnimationsEnabled:YES];
         }
     }

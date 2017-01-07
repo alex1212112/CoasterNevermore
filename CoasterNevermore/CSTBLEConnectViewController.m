@@ -108,7 +108,7 @@
         
         [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
             
-            [self.view layoutIfNeeded];
+            [self.view layoutSubviews];
             self.reScanButton.alpha = 1;
             
         } completion:^(BOOL finished) {

@@ -35,7 +35,7 @@
 
     [super didMoveToSuperview];
     [self setNeedsLayout];
-    [self layoutIfNeeded];
+    [self layoutSubviews];
 }
 
 

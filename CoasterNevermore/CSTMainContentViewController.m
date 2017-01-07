@@ -129,7 +129,7 @@
     
     [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
         
-        [self.view layoutIfNeeded];
+        [self.view layoutSubviews];
         
     } completion:^(BOOL finished) {
         
@@ -142,7 +142,7 @@
     
     [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
         
-        [self.view layoutIfNeeded];
+        [self.view layoutSubviews];
         
     } completion:^(BOOL finished) {
         
