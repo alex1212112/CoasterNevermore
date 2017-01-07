@@ -258,7 +258,9 @@
 - (void)show
 {
     UIViewController *topVC = [self appRootViewController];
-    self.frame = CGRectMake((CGRectGetWidth(topVC.view.bounds) - kAlertWidth) * 0.5, - kAlertHeight - 30, kAlertWidth, kAlertHeight);
+//    self.frame = CGRectMake((CGRectGetWidth(topVC.view.bounds) - kAlertWidth) * 0.5, - kAlertHeight - 30, kAlertWidth, kAlertHeight);
+    self.frame = CGRectMake((CGRectGetWidth(topVC.view.bounds) - kAlertWidth) * 0.5, (CGRectGetHeight(topVC.view.bounds) - kAlertHeight) * 0.5, kAlertWidth, kAlertHeight);
+
     [topVC.view addSubview:self];
 }
 
@@ -291,23 +293,27 @@
     
     [self.backImageView removeFromSuperview];
     self.backImageView = nil;
-    UIViewController *topVC = [self appRootViewController];
-    CGRect afterFrame = CGRectMake((CGRectGetWidth(topVC.view.bounds) - kAlertWidth) * 0.5, CGRectGetHeight(topVC.view.bounds), kAlertWidth, kAlertHeight);
     
-    
-    [UIView animateWithDuration:0.35f delay:0.0 options:UIViewAnimationOptionCurveEaseOut animations:^{
-        self.frame = afterFrame;
-        if (self->_leftLeave) {
-            self.transform = CGAffineTransformMakeRotation(-M_1_PI / 1.5);
-        }else {
-            self.transform = CGAffineTransformMakeRotation(M_1_PI / 1.5);
-        }
-        self.alpha = 0.0;
-    } completion:^(BOOL finished) {
-        if (self.superview) {
-            [super removeFromSuperview];
-        }
-    }];
+    if (self.superview) {
+        [super removeFromSuperview];
+    }
+//    UIViewController *topVC = [self appRootViewController];
+//    CGRect afterFrame = CGRectMake((CGRectGetWidth(topVC.view.bounds) - kAlertWidth) * 0.5, CGRectGetHeight(topVC.view.bounds), kAlertWidth, kAlertHeight);
+//    
+//    
+//    [UIView animateWithDuration:0.35f delay:0.0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+//        self.frame = afterFrame;
+//        if (self->_leftLeave) {
+//            self.transform = CGAffineTransformMakeRotation(-M_1_PI / 1.5);
+//        }else {
+//            self.transform = CGAffineTransformMakeRotation(M_1_PI / 1.5);
+//        }
+//        self.alpha = 0.0;
+//    } completion:^(BOOL finished) {
+//        if (self.superview) {
+//            [super removeFromSuperview];
+//        }
+//    }];
 }
 
 - (void)willMoveToSuperview:(UIView *)newSuperview
@@ -324,8 +330,8 @@
         self.backImageView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
     }
     [topVC.view addSubview:self.backImageView];
-    self.transform = CGAffineTransformMakeRotation(-M_1_PI / 2);
-    
+//    self.transform = CGAffineTransformMakeRotation(-M_1_PI / 2);
+    self.transform = CGAffineTransformScale(CGAffineTransformIdentity, 0.5, 0.5);
     CGRect afterFrame = CGRectMake((CGRectGetWidth(topVC.view.bounds) - kAlertWidth) * 0.5, (CGRectGetHeight(topVC.view.bounds) - kAlertHeight) * 0.5, kAlertWidth, kAlertHeight);
     
 //    [UIView animateWithDuration:0.35f delay:0.0 options:UIViewAnimationOptionCurveEaseIn animations:^{
@@ -338,7 +344,8 @@
 //    }];
     
     [UIView animateWithDuration:0.35 delay:0.0 usingSpringWithDamping:0.8 initialSpringVelocity:0.8 options:UIViewAnimationOptionCurveEaseOut animations:^{
-        self.transform = CGAffineTransformMakeRotation(0);
+//        self.transform = CGAffineTransformMakeRotation(0);
+        self.transform = CGAffineTransformIdentity;
         self.frame = afterFrame;
     } completion:^(BOOL finished) {
         
