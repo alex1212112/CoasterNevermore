@@ -158,17 +158,8 @@
     [[tap rac_gestureSignal] subscribeNext:^(id x) {
         
         @strongify(self);
-        NSLog(@"how are you%@",NSStringFromSelector(_cmd));
-        NSLog(@"%@",tap.view.description);
         [self p_stopScan];
     }];
-    
-    UIView *view = self.navigationController.navigationBar;
-    view.userInteractionEnabled = YES;
-    [view addGestureRecognizer:tap];
-    
-    
-//    [[UIApplication sharedApplication].keyWindow addGestureRecognizer:tap];
 }
 
 - (void)p_stopScan{
