@@ -27,6 +27,7 @@
 //We need an effect container view to suppress the annoying warning on alpha of a visual effect view.
 @property (nonatomic, strong) UIView *effectContainerView;
 @property (nonatomic, strong) UIVisualEffectView *dimmingView;
+@property (nonatomic, strong) UIBlurEffect *blurEffect;
 @end
 
 @implementation VVBlurPresentationController
@@ -34,11 +35,11 @@
 - (instancetype)initWithPresentedViewController:(UIViewController *)presentedViewController presentingViewController:(UIViewController *)presentingViewController style:(UIBlurEffectStyle)style {
     self = [super initWithPresentedViewController:presentedViewController presentingViewController:presentingViewController];
     if (self) {
-        UIBlurEffect *effect = [UIBlurEffect effectWithStyle:style];
-        _dimmingView = [[UIVisualEffectView alloc] initWithEffect:effect];
+        _blurEffect = [UIBlurEffect effectWithStyle:style];
+        _dimmingView = [[UIVisualEffectView alloc] initWithEffect:_blurEffect];
         _blurStyle = style;
         _effectContainerView = [UIView new];
-        _effectContainerView.alpha = 0.0;
+//        _effectContainerView.alpha = 0.0;
     }
     return self;
 }
@@ -50,15 +51,18 @@
     [self.effectContainerView insertSubview:self.dimmingView atIndex:0];
     [self.containerView insertSubview:self.effectContainerView atIndex:0];
     
-    self.effectContainerView.alpha = 0.0;
+//    self.effectContainerView.alpha = 0.0;
+    self.dimmingView.effect = nil;
     
     id <UIViewControllerTransitionCoordinator> coordinator = [self.presentedViewController transitionCoordinator];
     if (coordinator) {
         [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext> context) {
-            self.effectContainerView.alpha = 1.0;
+//            self.effectContainerView.alpha = 1.0;
+            self.dimmingView.effect = self.blurEffect;
         } completion:nil];
     } else {
-        self.effectContainerView.alpha = 1.0;
+//        self.effectContainerView.alpha = 1.0;
+        self.dimmingView.effect = self.blurEffect;
     }
 }
 
@@ -66,10 +70,12 @@
     id <UIViewControllerTransitionCoordinator> coordinator = [self.presentedViewController transitionCoordinator];
     if (coordinator) {
         [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext> context) {
-            self.effectContainerView.alpha = 0.0;
+//            self.effectContainerView.alpha = 0.0;
+            self.dimmingView.effect  = nil;
         } completion:nil];
     } else {
-        self.effectContainerView.alpha = 0.0;
+//        self.effectContainerView.alpha = 0.0;
+        self.dimmingView.effect = nil;
     }
 }
 

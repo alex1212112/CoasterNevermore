@@ -17,6 +17,7 @@
 @property (nonatomic, strong) UITextView *textView;
 @property (nonatomic, strong) UIVisualEffectView *shaderView;
 @property (nonatomic, strong) UILabel *titleLabel;
+@property (nonatomic, strong) UIBlurEffect *blurEffect;
 
 @end
 
@@ -68,7 +69,7 @@
     self.shaderView.center = view.center;
     [self.shaderView.contentView addSubview:self];
     
-    self.shaderView.alpha = 0.0;
+//    self.shaderView.alpha = 0.0;
     
     self.bounds =  CGRectMake(0.0, 0.0, CGRectGetWidth(view.bounds), CGRectGetHeight(view.bounds) * 180.0 / 568.0);
     
@@ -209,7 +210,7 @@
     if (animationDuration == 0)
     {
         self.center = CGPointMake(CGRectGetMidX(self.frame), CGRectGetHeight(self.superview.frame) - keyboardHeight - CGRectGetMidY(self.bounds));
-        self.shaderView.alpha = 1.0f;
+        self.shaderView.effect = self.blurEffect;
     }
     else
     {
@@ -221,7 +222,7 @@
                              if (!self.hidden)
                              {
                                  self.center = CGPointMake(CGRectGetMidX(self.frame), CGRectGetHeight(self.superview.frame) - keyboardHeight - CGRectGetMidY(self.bounds));
-                                 self.shaderView.alpha = 1.0f;
+                                 self.shaderView.effect = self.blurEffect;
                                  
                              }
                              
@@ -256,7 +257,7 @@
                      animations:^{
                          
                          self.center =  CGPointMake(CGRectGetWidth(self.frame) / 2, CGRectGetHeight(self.superview.frame) + CGRectGetHeight(self.frame) / 2 );
-                         self.shaderView.alpha = 0.0f;
+                         self.shaderView.effect = nil;
                      }
                      completion:^(BOOL finished){
                          
@@ -345,15 +346,23 @@ static inline UIViewAnimationOptions animationOptionsWithCurve(UIViewAnimationCu
 
     if (!_shaderView) {
         
-        UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleDark];
-        
-        _shaderView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
+//        UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleDark];
+//        
+        _shaderView = [[UIVisualEffectView alloc] initWithEffect:nil];
 
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(p_tap:)];
         [_shaderView addGestureRecognizer:tap];
     }
     
     return _shaderView;
+}
+
+- (UIBlurEffect *)blurEffect {
+
+    if (!_blurEffect) {
+        _blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleDark];
+    }
+    return _blurEffect;
 }
 
 - (UILabel *)titleLabel{
