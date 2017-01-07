@@ -329,7 +329,7 @@ static CSTRouter *instance = nil;
         
         if ([deviceVC.navigationController.viewControllers[viewControllerCount - 2]  isKindOfClass:[CSTBLEConnectViewController class]]) {
             
-            [deviceVC.navigationController popViewControllerAnimated:NO];
+            [deviceVC.navigationController popViewControllerAnimated:YES];
             
         }else{
         

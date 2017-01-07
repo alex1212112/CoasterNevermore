@@ -104,8 +104,8 @@
             if ([self.presentingViewController isKindOfClass:[UINavigationController class]]) {
                 
                 UINavigationController *nav = (UINavigationController *)self.presentingViewController;
+                [self.presentingViewController dismissViewControllerAnimated:NO completion:nil];
                 [CSTRouter routerToDeviceStateTableViewControllerFromBLEConnectViewController:nav.topViewController];
-                [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
             }
             
             

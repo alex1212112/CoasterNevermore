@@ -47,11 +47,6 @@
     [self p_configReScanButton];
     [self p_configNotNowButton];
     
-    [self.radarView startAnimation];
-    [self.viewModel startScan];
-    [self p_startTimer];
-    [self p_showScanResultAfterDelay:2.0];
-    
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -64,6 +59,10 @@
     
     [super viewDidAppear:animated];
     [self p_configCoasterViewAfterViewDidLayout];
+    [self.radarView startAnimation];
+    [self.viewModel startScan];
+    [self p_startTimer];
+    [self p_showScanResultAfterDelay:2.0];
 }
 
 - (void)viewDidDisappear:(BOOL)animated{
@@ -151,7 +150,6 @@
 
 - (void)p_configTap{
 
-    
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] init];
     [self.view addGestureRecognizer:tap];
     
@@ -160,8 +158,17 @@
     [[tap rac_gestureSignal] subscribeNext:^(id x) {
         
         @strongify(self);
+        NSLog(@"how are you%@",NSStringFromSelector(_cmd));
+        NSLog(@"%@",tap.view.description);
         [self p_stopScan];
     }];
+    
+    UIView *view = self.navigationController.navigationBar;
+    view.userInteractionEnabled = YES;
+    [view addGestureRecognizer:tap];
+    
+    
+//    [[UIApplication sharedApplication].keyWindow addGestureRecognizer:tap];
 }
 
 - (void)p_stopScan{
@@ -228,12 +235,19 @@
     
     [self.reScanButton setAttributedTitle:attibutedString forState:UIControlStateNormal];
     
-    @weakify(self);
-    [[self.reScanButton rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
-        @strongify(self);
-        
-        [self p_startScan];
-    }];
+//    @weakify(self);
+//    [[self.reScanButton rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
+//        @strongify(self);
+//        
+//        [self p_startScan];
+//    }];
+    
+    [self.reScanButton addTarget:self action:@selector(reScanButtonDidClick:) forControlEvents:UIControlEventTouchUpInside];
+}
+
+- (void)reScanButtonDidClick:(id)sender {
+
+    [self p_startScan];
 }
 
 - (void)p_configNotNowButton{
