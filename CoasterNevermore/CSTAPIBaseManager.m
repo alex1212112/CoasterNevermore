@@ -98,7 +98,7 @@
 @implementation CSTRegisterAPIManager
 - (NSString *)apiName
 {
-    return @"api/Account/Register";
+    return @"api/account/register";
 }
 - (NSString *)baseURLString
 {
