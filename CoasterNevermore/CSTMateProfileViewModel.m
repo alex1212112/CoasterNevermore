@@ -108,7 +108,7 @@
         
         return @"Soon...";
     }
-    NSDate *date = [NSDate cst_dateWithOriginString:dateString Format:@"yyyy-MM-dd'T'HH:mm:ss.SSS"];
+    NSDate *date = [NSDate cst_dateWithOriginString:dateString Format:@"yyyy-MM-dd HH:mm:ss"];
     return [date cst_stringWithFormat:@"yyyy-MM-dd"];
 }
 

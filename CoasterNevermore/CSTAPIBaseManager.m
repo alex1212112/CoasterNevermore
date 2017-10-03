@@ -613,7 +613,7 @@
 
 - (NSString *)apiName{
     
-    return @"api/relationship/acceptRequest";
+    return @"api/relationship/acceptrequest";
 }
 - (NSString *)baseURLString{
     
@@ -683,7 +683,7 @@
 
 - (NSString *)apiName{
     
-    return @"api/relationship/cancelRequest";
+    return @"api/relationship/cancelrequest";
 }
 - (NSString *)baseURLString{
     

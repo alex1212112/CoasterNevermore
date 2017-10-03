@@ -34,15 +34,15 @@
 + (NSDictionary *)JSONKeyPathsByPropertyKey
 {
     return @{
-             @"uid" : @"Uid",
-             @"birthday" : @"Birthday",
-             @"email" : @"Email",
-             @"height" : @"Height",
-             @"weight" : @"Weight",
-             @"nickname" : @"NickName",
-             @"phone" : @"Phone",
-             @"gender" : @"Gender",
-             @"deviceId" : @"DeviceId",
+             @"uid" : @"uid",
+             @"birthday" : @"birthday",
+             @"email" : @"email",
+             @"height" : @"height",
+             @"weight" : @"weight",
+             @"nickname" : @"nickname",
+             @"phone" : @"phone",
+             @"gender" : @"gender",
+             @"deviceId" : @"deviceid",
              };
 }
 

@@ -13,7 +13,9 @@
 //NSString *const CSTCoasterBaseURLString = @"http://121.41.94.186:10001/";
 
 //NSString *const CSTCoasterBaseURLString = @"http://121.40.130.249:10001/";
-NSString *const CSTCoasterBaseURLString = @"http://www.adminchao.com:2017/";
+//NSString *const CSTCoasterBaseURLString = @"http://www.adminchao.com:2017/";
+NSString *const CSTCoasterBaseURLString = @"http://192.168.31.10/";
+
 
 
 
