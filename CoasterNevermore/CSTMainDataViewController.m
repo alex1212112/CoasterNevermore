@@ -322,18 +322,21 @@
     if (!_leftButton) {
         
         _leftButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        _leftButton.bounds =  (CGRect){
+        _leftButton.layer.borderColor = [UIColor whiteColor].CGColor;
+        _leftButton.layer.borderWidth = 1.0;
+        _leftButton.layer.cornerRadius = 16.0;
+        _leftButton.layer.masksToBounds = YES;
+        CGRect rect = (CGRect){
             .origin.x = 0.0,
             .origin.y = 0.0,
             .size.width =  32.0,
             .size.height = 32.0,
         };
-        _leftButton.layer.borderColor = [UIColor whiteColor].CGColor;
-        _leftButton.layer.borderWidth = 1.0;
-        _leftButton.layer.cornerRadius = 16.0;
-        _leftButton.layer.masksToBounds = YES;
-        [_leftButton setImage:[UIImage imageNamed:@"AvatarIcon"] forState:UIControlStateNormal];
-        
+        UIImage *image = [UIImage imageNamed:@"AvatarIcon"];
+        [_leftButton setImage:image forState:UIControlStateNormal];
+        _leftButton.bounds =  rect;
+        [_leftButton.widthAnchor constraintEqualToConstant:32].active = YES;
+        [_leftButton.heightAnchor constraintEqualToConstant:32].active = YES;
         [self p_configImageWithButton:_leftButton];
         
         [self p_configEventWithLeftButton:_leftButton];

@@ -46,7 +46,9 @@
     
     [JPUSHService registerForRemoteNotificationConfig:entity delegate:self];
     
-    [JPUSHService setupWithOption:launchOptions appKey:@"7fa7f247619f0156b1761172" channel:@"App Store" apsForProduction:YES advertisingIdentifier:nil];
+//    [JPUSHService setupWithOption:launchOptions appKey:@"7fa7f247619f0156b1761172" channel:@"App Store" apsForProduction:YES];
+    
+    [JPUSHService setupWithOption:launchOptions appKey:@"7fa7f247619f0156b1761172" channel:@"App Store" apsForProduction:NO];
     
     NSNotificationCenter *defaultCenter = [NSNotificationCenter defaultCenter];
     [defaultCenter addObserver:self selector:@selector(p_networkDidReceiveMessage:) name:kJPFNetworkDidReceiveMessageNotification object:nil];
@@ -68,28 +70,40 @@
 + (void)configJpushAlias:(NSString *)string{
 
     if (!string) {
-        [JPUSHService setAlias:@"" callbackSelector:nil object:nil];
+//        [JPUSHService setAlias:@"" callbackSelector:nil object:nil];
+        [JPUSHService deleteAlias:^(NSInteger iResCode, NSString *iAlias, NSInteger seq) {
+            
+        } seq:0];
         return;
     }
     
     string = [string stringByReplacingOccurrencesOfString:@"-" withString:@""];
-    [JPUSHService setAlias:string callbackSelector:nil object:nil];
-    
+//    [JPUSHService setAlias:string callbackSelector:nil object:nil];
+    [JPUSHService setAlias:string completion:^(NSInteger iResCode, NSString *iAlias, NSInteger seq) {
+        
+    } seq:0];
 }
 
 #pragma mark - JPUSHRegisterDelegate
 // iOS 10 Support
 - (void)jpushNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(NSInteger))completionHandler {
     // Required
+    if ([UIApplication sharedApplication].applicationState == UIApplicationStateActive) {
+        return;
+    }
+    
     NSDictionary * userInfo = notification.request.content.userInfo;
     if([notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
         [JPUSHService handleRemoteNotification:userInfo];
     }
-    completionHandler(UNNotificationPresentationOptionAlert); // 需要执行这个方法，选择是否提醒用户，有Badge、Sound、Alert三种类型可以选择设置
+    completionHandler(UNNotificationPresentationOptionAlert | UNNotificationPresentationOptionSound | UNNotificationPresentationOptionBadge); // 需要执行这个方法，选择是否提醒用户，有Badge、Sound、Alert三种类型可以选择设置
 }
 
 // iOS 10 Support
 - (void)jpushNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void (^)())completionHandler {
+    if ([UIApplication sharedApplication].applicationState == UIApplicationStateActive) {
+        return;
+    }
     // Required
     NSDictionary * userInfo = response.notification.request.content.userInfo;
     if([response.notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {

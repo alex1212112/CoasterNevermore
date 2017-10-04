@@ -305,7 +305,7 @@ NSString *const CSTHistoryUserSuggestWaterKey = @"CSTHistoryUserSuggestWaterKey"
     [CSTJPushManager configJpushAlias:nil];
     [[CSTLocalNotification  shareNotification] removeNotifications];
     
-    [[[SDWebImageManager sharedManager] imageCache] clearDisk];
+    [[[SDWebImageManager sharedManager] imageCache] clearDiskOnCompletion:nil];
     [[[SDWebImageManager sharedManager] imageCache] clearMemory];
 
 }

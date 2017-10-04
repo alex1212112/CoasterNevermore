@@ -594,7 +594,7 @@ const NSInteger CSTQQLoginErrorWrongParameterCode = 10030404;
     
    return  [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
         
-        [[SDWebImageManager sharedManager] downloadImageWithURL:[NSURL URLWithString:urlString] options:0 progress:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
+        [[SDWebImageManager sharedManager] loadImageWithURL:[NSURL URLWithString:urlString] options:0 progress:nil completed:^(UIImage *image, NSData *data, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
             
             if (error) {
                 [subscriber sendError:error];

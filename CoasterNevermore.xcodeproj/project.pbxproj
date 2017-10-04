@@ -150,8 +150,6 @@
 		70F62E2B1B5F5C8F008AC862 /* CSTDetailDataViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 70F62E2A1B5F5C8F008AC862 /* CSTDetailDataViewModel.m */; };
 		70F62E2E1B5F5D4A008AC862 /* CSTDetailTableViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 70F62E2D1B5F5D4A008AC862 /* CSTDetailTableViewModel.m */; };
 		70F62E311B613B0A008AC862 /* CSTHealthRank.m in Sources */ = {isa = PBXBuildFile; fileRef = 70F62E301B613B0A008AC862 /* CSTHealthRank.m */; };
-		9A7479B11E0FE8630063A99C /* jcore-ios-1.0.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A7479AE1E0FE8630063A99C /* jcore-ios-1.0.0.a */; };
-		9A7479B21E0FE8630063A99C /* jpush-ios-3.0.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A7479AF1E0FE8630063A99C /* jpush-ios-3.0.0.a */; };
 		9A7479B41E0FF1570063A99C /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A7479B31E0FF1570063A99C /* libz.tbd */; };
 		9A7479B61E0FF17F0063A99C /* libresolv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A7479B51E0FF17F0063A99C /* libresolv.tbd */; };
 		9A7479B81E0FF18E0063A99C /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A7479B71E0FF18E0063A99C /* UserNotifications.framework */; };
@@ -449,9 +447,6 @@
 		70F62E2F1B613B0A008AC862 /* CSTHealthRank.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSTHealthRank.h; sourceTree = "<group>"; };
 		70F62E301B613B0A008AC862 /* CSTHealthRank.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSTHealthRank.m; sourceTree = "<group>"; };
 		9A7479AD1E0F7B930063A99C /* CoasterNevermore.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CoasterNevermore.entitlements; sourceTree = "<group>"; };
-		9A7479AE1E0FE8630063A99C /* jcore-ios-1.0.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "jcore-ios-1.0.0.a"; sourceTree = "<group>"; };
-		9A7479AF1E0FE8630063A99C /* jpush-ios-3.0.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "jpush-ios-3.0.0.a"; sourceTree = "<group>"; };
-		9A7479B01E0FE8630063A99C /* JPUSHService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JPUSHService.h; sourceTree = "<group>"; };
 		9A7479B31E0FF1570063A99C /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		9A7479B51E0FF17F0063A99C /* libresolv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.tbd; path = usr/lib/libresolv.tbd; sourceTree = SDKROOT; };
 		9A7479B71E0FF18E0063A99C /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
@@ -475,8 +470,6 @@
 				709F0FBC1BDBA875001D8067 /* libSocialWechat.a in Frameworks */,
 				709F0FBD1BDBA875001D8067 /* libWeChatSDK.a in Frameworks */,
 				709F0F831BDBA7C6001D8067 /* libMobClickLibrary.a in Frameworks */,
-				9A7479B11E0FE8630063A99C /* jcore-ios-1.0.0.a in Frameworks */,
-				9A7479B21E0FE8630063A99C /* jpush-ios-3.0.0.a in Frameworks */,
 				70637F0A1B70A6F000BDB366 /* libstdc++.dylib in Frameworks */,
 				70637F081B70A6DC00BDB366 /* CoreTelephony.framework in Frameworks */,
 				709F0FBA1BDBA875001D8067 /* TencentOpenAPI.framework in Frameworks */,
@@ -666,16 +659,6 @@
 				704F13821B7F39EB0059C8CB /* SDWebImageManager+CSTDownloadSignal.m */,
 			);
 			name = Catagory;
-			sourceTree = "<group>";
-		};
-		704BF6351B79DD6600F1C27E /* JPushLib */ = {
-			isa = PBXGroup;
-			children = (
-				9A7479AE1E0FE8630063A99C /* jcore-ios-1.0.0.a */,
-				9A7479AF1E0FE8630063A99C /* jpush-ios-3.0.0.a */,
-				9A7479B01E0FE8630063A99C /* JPUSHService.h */,
-			);
-			path = JPushLib;
 			sourceTree = "<group>";
 		};
 		704BF6411B7B0A6D00F1C27E /* LocalNotification */ = {
@@ -1035,7 +1018,6 @@
 		70C62D191B2B28CA004FE7FA /* 3rdParty */ = {
 			isa = PBXGroup;
 			children = (
-				704BF6351B79DD6600F1C27E /* JPushLib */,
 				70637EC01B70A51D00BDB366 /* Umeng */,
 				70DCC8A51B565403006FE66A /* MBProgress */,
 				7058E66E1B442D8700D1CFAD /* VVBlurPresentation */,
@@ -1331,9 +1313,22 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-CoasterNevermore/Pods-CoasterNevermore-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
+				"${BUILT_PRODUCTS_DIR}/CorePlot/CorePlot.framework",
+				"${BUILT_PRODUCTS_DIR}/LinqToObjectiveC/LinqToObjectiveC.framework",
+				"${BUILT_PRODUCTS_DIR}/Mantle/Mantle.framework",
+				"${BUILT_PRODUCTS_DIR}/ReactiveCocoa/ReactiveCocoa.framework",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AFNetworking.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CorePlot.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LinqToObjectiveC.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Mantle.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReactiveCocoa.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1346,13 +1341,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-CoasterNevermore-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		F1840DD709406517B93B6055 /* [CP] Copy Pods Resources */ = {

@@ -592,7 +592,7 @@
 
 - (NSString *)apiName{
     
-    return @"api/relationship/denyRequest";
+    return @"api/relationship/denyrequest";
 }
 - (NSString *)baseURLString{
     

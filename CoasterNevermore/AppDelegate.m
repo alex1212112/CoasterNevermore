@@ -19,6 +19,8 @@
 #import "CSTJPushManager.h"
 #import "CSTRouter.h"
 #import "CSTUserDefaults.h"
+#import <UserNotifications/UserNotifications.h>
+
 
 @interface AppDelegate ()
 

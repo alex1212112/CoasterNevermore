@@ -224,7 +224,7 @@
         
         if ([AFNetworkReachabilityManager sharedManager].reachable) {
             
-            [[[SDWebImageManager sharedManager] imageCache] clearDisk];
+            [[[SDWebImageManager sharedManager] imageCache] clearDiskOnCompletion:nil];
             [[[SDWebImageManager sharedManager] imageCache] clearMemory];
         }
     }];
