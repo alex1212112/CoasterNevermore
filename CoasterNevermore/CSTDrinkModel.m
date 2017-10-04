@@ -35,7 +35,7 @@
     return @{
              @"lowercaseLetterKeyDate" : @"datetime",
              @"uppercaseLetterKeyDate" : @"DateTime",
-             @"weight" : @"Weight",
+             @"weight" : @"weight",
              };
 }
 
