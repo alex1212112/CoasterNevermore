@@ -19,6 +19,7 @@
 #import "CSTMainDataViewModel.h"
 #import "CSTUserCenterViewController.h"
 #import "CSTDetailDataViewController.h"
+#import "UIViewController+CSTDismissKeyboard.h"
 
 @interface CSTMainDataViewController () <UIScrollViewDelegate>
 
@@ -178,6 +179,8 @@
         self. titleSegment.selectedSegmentIndex = 0;
         
     }
+    
+    [self.willBindMateViewController cst_dismissKeyboard];
 }
 
 #pragma mark - Public method
