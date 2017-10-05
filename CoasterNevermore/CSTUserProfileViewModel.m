@@ -152,7 +152,7 @@
     }
     if (self.editGender) {
         
-        dic[@"gender"] = [self.editGender isEqual:@(CSTUserGenderFemale)] ? @"false" : @"true";
+        dic[@"gender"] = self.editGender;
     }
     
     if (self.editHeight) {

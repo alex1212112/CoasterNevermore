@@ -240,7 +240,7 @@ const NSInteger CSTQQLoginErrorWrongParameterCode = 10030404;
              @"phone":self.userName,
              @"password":self.password,
              @"code":self.verifiedCode,
-             @"gender" : @"false",
+             @"gender" : @0,
              @"nickname" : self.userName,
             };
 }
@@ -557,7 +557,7 @@ const NSInteger CSTQQLoginErrorWrongParameterCode = 10030404;
 - (NSDictionary *)p_qqUserProfileWithData:(UMSocialResponseEntity *)response{
 
     NSString *qqAvatarUrlString = response.data[@"profile_image_url"];
-    NSString *genderString = [response.data[@"gender"] isEqualToString:@"男"] ? @"true" : @"false";
+    NSNumber *gender = [response.data[@"gender"] isEqualToString:@"男"] ? @1 : @0;
     NSString *nickname = response.data[@"screen_name"];
     
     NSMutableDictionary *mutableDic = [NSMutableDictionary dictionary];
@@ -568,7 +568,7 @@ const NSInteger CSTQQLoginErrorWrongParameterCode = 10030404;
         [mutableDic setObject:nickname forKey:@"nickname"];
     }
     
-    [mutableDic setObject:genderString forKey:@"gender"];
+    [mutableDic setObject:gender forKey:@"gender"];
     return [NSDictionary dictionaryWithDictionary:mutableDic];
 
 }

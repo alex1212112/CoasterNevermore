@@ -123,13 +123,13 @@
     
     __block NSNumber *height;
     __block NSNumber *weight;
-    __block NSString *gender;
+    __block NSNumber *gender;
     __block NSString *birthday;
     
     [self.userDataInitialCellModels enumerateObjectsUsingBlock:^(CSTInitialDataCellModel *cellModel, NSUInteger idx, BOOL *stop) {
         
         if (idx == 0) {
-            gender = [cellModel.userInfo.gender integerValue] ? @"true" : @"false";
+            gender = cellModel.userInfo.gender;
         }else if (idx == 1){
             weight = cellModel.userInfo.weight;
         }else if (idx == 2){
