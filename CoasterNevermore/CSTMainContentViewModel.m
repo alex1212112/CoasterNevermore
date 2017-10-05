@@ -558,6 +558,8 @@
     }] doNext:^(id x) {
 
         [CSTDataManager shareManager].historyMateDrinkWater = [x cst_distinctAndSortResultWithKeyPath:@"date"];
+        
+        
     }];
 }
 

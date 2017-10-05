@@ -460,7 +460,7 @@ NSString *const CSTHistoryUserSuggestWaterKey = @"CSTHistoryUserSuggestWaterKey"
 
 - (void)p_removeHistoryMateDrinkWater{
     
-    [self p_removeFromUserDefaultsWithidentify:CSTTodayMateDrinkWaterKey];
+    [self p_removeFromUserDefaultsWithidentify:CSTHistoryMateDrinkWaterKey];
     self.historyMateDrinkWater = nil;
 }
 

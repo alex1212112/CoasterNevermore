@@ -469,7 +469,7 @@
                      
                      [self p_enanbleUserInteractionWithButton:self.smsVerifiedCodeButton];
                      self.verifiedCodeTextField.rightView = self.leftTimeLabel;
-                     [[CSTTimerManager shareManager] stopTimer:CSTSMSTimerRegiser];
+                     [[CSTTimerManager shareManager] startTimer:CSTSMSTimerRegiser];
                      
                  }] doError:^(NSError *error) {
                      
