@@ -79,6 +79,7 @@ static CSTNetworkManager *instance = nil;
                                 parameters:(NSDictionary *)parameters
 {
     
+    requestSerializer.timeoutInterval = 10.0f;
     return [requestSerializer requestWithMethod:requestMothod
                                       URLString:[baseURLString stringByAppendingString:apiName]
                                      parameters:parameters error:nil];
