@@ -89,7 +89,7 @@
     self.introduceButton.layer.borderColor = [UIColor waveColor].CGColor;
     [[self.introduceButton rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
         
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.nevermore.cn/coaster"]];
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.nevermore.cn"]];
     }];
 }
 
