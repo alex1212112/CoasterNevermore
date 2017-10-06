@@ -339,7 +339,9 @@ NSInteger const kShowDatesCount = 13;
         
         NSArray *modelArray = [dics linq_select:^id(id item) {
             
-            return [MTLJSONAdapter modelOfClass:[CSTDrinkModel class] fromJSONDictionary:item error:nil];
+            NSError *error;
+            return [MTLJSONAdapter modelOfClass:[CSTDrinkModel class] fromJSONDictionary:item error:&error];
+            
         }];
         
         [subscriber sendNext:modelArray];

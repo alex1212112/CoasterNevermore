@@ -217,7 +217,7 @@ const NSInteger CSTQQLoginErrorWrongParameterCode = 10030404;
 - (NSDictionary *)p_loginParameters
 {
     return @{
-             @"userName":self.userName,
+             @"username":self.userName,
              @"password":self.password,
              @"grant_type":@"password"
              };
