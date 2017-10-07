@@ -45,7 +45,7 @@
     [CSTUmeng configUmeng];
     [[CSTJPushManager shareManager] configJpushWithlaunchOptions:launchOptions];
     
-    [[CSTQQManager shareManager] showQQLoginWhenFirstUse];
+//    [[CSTQQManager shareManager] showQQLoginWhenFirstUse];
     
     return YES;
 }

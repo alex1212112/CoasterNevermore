@@ -1676,6 +1676,7 @@
 				CODE_SIGN_ENTITLEMENTS = CoasterNevermore/CoasterNevermore.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Guohua Ren (NBLF4TFQN6)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = NBLF4TFQN6;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/CoasterNevermore/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
@@ -1707,6 +1708,7 @@
 				CODE_SIGN_ENTITLEMENTS = CoasterNevermore/CoasterNevermore.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Guohua Ren (NBLF4TFQN6)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = NBLF4TFQN6;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/CoasterNevermore/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
