@@ -691,7 +691,7 @@
         self.verifiedCodeTextField.text = @"";
         self.viewModel.verifiedCode = nil;
         if ([CSTUmeng isQQInstalled]) {
-            [self p_showBottomViews];
+//            [self p_showBottomViews];
         }
 
 
