@@ -29,9 +29,9 @@ NSString *const CSTWXAppSecret = @"fe5ca54333986cc1b6bcdd6f38ac6f29";
     //设置微信AppId，url地址传nil，将默认使用友盟的网址，需要#import "UMSocialWechatHandler.h"
     
     [UMSocialQQHandler setSupportWebView:YES];
-    [UMSocialWechatHandler setWXAppId:CSTWXAppId appSecret:CSTWXAppSecret url:@"http://www.nevermore.cn/coaster"];
+    [UMSocialWechatHandler setWXAppId:CSTWXAppId appSecret:CSTWXAppSecret url:@"https://www.nevermore.cn"];
     //设置手机QQ 的AppId，Appkey，和分享URL，需要#import "UMSocialQQHandler.h"
-    [UMSocialQQHandler setQQWithAppId:CSTQQAppId appKey:CSTQQAppKey url:@"http://www.nevermore.cn/coaster"];
+    [UMSocialQQHandler setQQWithAppId:CSTQQAppId appKey:CSTQQAppKey url:@"https://www.nevermore.cn"];
     
     //使用友盟统计
     
@@ -59,7 +59,7 @@ NSString *const CSTWXAppSecret = @"fe5ca54333986cc1b6bcdd6f38ac6f29";
     snsNames = [NSArray arrayWithArray:mutableSnsNames];
     
     [UMSocialData defaultData].extConfig.title = @"专注于饮水健康的智能杯垫";
-    [UMSocialData defaultData].extConfig.wechatSessionData.url = @"http://www.nevermore.cn/coaster";
+    [UMSocialData defaultData].extConfig.wechatSessionData.url = @"https://www.nevermore.cn";
     
     [UMSocialSnsService presentSnsIconSheetView:vc
                                          appKey:CSTUmengKey
