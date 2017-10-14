@@ -95,7 +95,7 @@
 
 - (NSString *)p_intervalDaysStringWithStartDateString:(NSString *)dateString{
 
-    NSDate *date = [NSDate cst_dateWithOriginString:dateString Format:@"yyyy-MM-dd'T'HH:mm:ss.SSS"];
+    NSDate *date = [NSDate cst_dateWithOriginString:dateString Format:@"yyyy-MM-dd HH:mm:ss"];
     
     NSTimeInterval interval = - [date timeIntervalSinceNow] / kCSTSecondsInOneDay;
     
